@@ -1,0 +1,27 @@
+body {
+    background-color: black;
+    color: white;
+    font-family: "Times New Roman", serif;
+    font-size: 25px;
+}
+
+a {
+    color: white;
+}
+
+.lcolumn {
+    float: left;
+    margin: 0 0 0 15%;
+    padding: 2% 0 37% 0;
+    border-right: solid 1px white;
+    width: 35%;
+    max-height: 0;
+}
+
+.rcolumn {
+    float: left;
+    padding: 2% 0 37% 3%;
+    border-left: solid 1px white;
+    width: 35%;
+    max-height: 0;
+}

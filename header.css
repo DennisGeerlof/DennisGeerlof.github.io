@@ -1,0 +1,22 @@
+header {
+    background-color: black;
+    color: white;
+    width: 100%;
+    vertical-align: top;
+    border-bottom: 1px solid white;
+}
+
+#logo {
+    float: inherit;
+    margin: 0 30px 0 30px;
+    vertical-align: center;
+}
+
+.links {
+    float: right;
+    color: white;
+    font-size: 25px;
+    display: inline-block;
+    padding: 3% 3% 0 0;
+    vertical-align: top;
+}
