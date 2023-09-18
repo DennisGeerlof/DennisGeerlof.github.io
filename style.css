@@ -10,6 +10,10 @@ body {
     display: inline-block;
 }
 
+#navigation {
+    max-width: 10%;
+}
+
 .nav {
     display: inline-block;
     padding: 0 10% 0 10%;
