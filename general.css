@@ -25,3 +25,14 @@ a {
     width: 35%;
     max-height: 0;
 }
+
+@media screen and (max-width: 800px) {
+    .lcolumn {
+        float: none;
+        width: 100%;
+    }
+    .rcolumn {
+        float: none;
+        width: 50%;
+    }
+}

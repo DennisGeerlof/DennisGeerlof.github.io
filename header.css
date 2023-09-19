@@ -7,6 +7,7 @@ header {
 }
 
 #logo {
+    height: 150px;
     float: inherit;
     margin: 0 30px 0 30px;
     vertical-align: center;
@@ -16,7 +17,18 @@ header {
     float: right;
     color: white;
     font-size: 25px;
-    display: inline-block;
     padding: 3% 3% 0 0;
-    vertical-align: top;
+}
+
+@media screen and (max-width: 800px) {
+    #logo {
+        height: 100px;
+    }
+    #navigation {
+        vertical-align: top;
+        width: 100%;
+    }
+    .links {
+        padding: 0;
+    }
 }
