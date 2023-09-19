@@ -10,8 +10,10 @@ body {
     display: inline-block;
 }
 
-#navigation {
-    
+#titel2 {
+    font-family: "Times New Roman", serif;
+    font-size: 50px;
+    display: none;
 }
 
 .nav {
@@ -22,4 +24,17 @@ body {
 a {
     color: white;
     font-size: 25px;
+}
+
+@media screen and (max-width: 800px) {
+    .navigation {
+        text-align: center;
+        margin: 0 10% 0 10%;
+    }
+    #titel {
+        display: none;
+    }
+    #titel2 {
+        display: block;
+    }
 }
