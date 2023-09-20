@@ -29,7 +29,7 @@ a {
 @media screen and (max-width: 800px) {
     .lcolumn {
         float: none;
-        width: 100%;
+        width: 50%;
     }
     .rcolumn {
         float: none;
