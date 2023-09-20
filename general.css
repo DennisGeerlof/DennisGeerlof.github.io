@@ -29,10 +29,16 @@ a {
 @media screen and (max-width: 800px) {
     .lcolumn {
         float: none;
-        width: 50%;
+        width: 100%;
+        border: none;
+        display: inline-block;
+        margin: 0 0 0 0;
     }
     .rcolumn {
         float: none;
-        width: 50%;
+        width: 100%;
+        border: none;
+        display: inline-block;
+        margin: 0 0 0 0;
     }
 }
