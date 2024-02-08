@@ -29,8 +29,14 @@ header {
     }
     #logo {
         height: 100px;
+        display: block;
+    }
+    #logo_bar{
+        vertical-align: center;
+        width: 100%;
     }
     .links {
         float: none;
+        font-size: 80%;
     }
 }

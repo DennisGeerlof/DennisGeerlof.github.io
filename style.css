@@ -28,7 +28,7 @@ a {
 
 @media screen and (max-width: 800px) {
     .navigation {
-        text-align: center;
+        width: 200px;
         margin: 0 10% 0 10%;
     }
     #titel {
