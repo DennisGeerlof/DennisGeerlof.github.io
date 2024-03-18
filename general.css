@@ -52,4 +52,7 @@ a {
         font-size: 20px;
         max-width: 150px;
     }
+    br {
+        display: none;
+    }
 }
