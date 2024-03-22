@@ -18,6 +18,10 @@ a {
     max-height: 0;
 }
 
+.info {
+    padding: 0 70px 0 0;
+}
+
 .rcolumn {
     float: left;
     padding: 2% 0 37% 3%;
@@ -34,6 +38,11 @@ a {
         display: inline-block;
         margin: 0 0 0 0;
     }
+
+    .info {
+        padding: 0 0 0 0;
+    }
+
     .rcolumn {
         float: none;
         width: 100vw;
@@ -42,17 +51,18 @@ a {
         margin: 0 0 0 0;
         padding: 3% 0 0 0;
     }
+
     img {
-        max-width: 100%
+        max-width: 95%;
     }
+
     table {
         display: inline-block;
     }
+
     td {
         font-size: 20px;
         max-width: 150px;
     }
-    br {
-        display: none;
-    }
+
 }
