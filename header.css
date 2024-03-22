@@ -12,11 +12,15 @@ header {
     vertical-align: center;
 }
 
-.links {
+
+#nav {
     float: right;
-    color: white;
-    font-size: 25px;
-    padding: 3% 3% 0 0;
+}
+
+.links {
+    height: 150px;
+    align-content: center;
+    padding: 0 15px 0 0;
 }
 
 @media screen and (max-width: 800px) {
@@ -26,16 +30,17 @@ header {
         text-align: center;
         width: 100%;
     }
+
     #logo {
         height: 100px;
         display: block;
     }
-    #logo_bar{
-        vertical-align: center;
-        width: 100%;
-    }
-    .links {
+
+    #nav {
         float: none;
-        font-size: 80%;
+    }
+
+    .links {
+        height: auto;
     }
 }
