@@ -1,4 +1,4 @@
-html body {
+body {
     height: 98vh;
     color: white;
     background-color: black;
@@ -65,6 +65,10 @@ header {
     max-width: 100%;
 }
 
+.icons {
+    margin: 0 0 0 15px;
+}
+
 #flexbox {
     height: 90%;
     display: flex;
@@ -109,4 +113,9 @@ footer {
 
 @media screen and (max-width: 930px) {
     
+}
+
+.dark-mode {
+    filter: invert(100%);
+    background-color: white;
 }

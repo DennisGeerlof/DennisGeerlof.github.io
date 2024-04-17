@@ -11,3 +11,7 @@ updateTime(); // Update time when the page loads
 
 // Update time every second
 setInterval(updateTime, 1000);
+
+document.getElementById('darkModeToggle').addEventListener('click', function() {
+    document.body.classList.toggle('dark-mode');
+});
