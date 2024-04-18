@@ -116,10 +116,14 @@ footer {
     border-top: 2px solid white;
 }
 
-@media screen and (max-width: 930px) {
+@media screen and (max-width: 600px) {
 
     #flex-container {
         height: 95vh;
+    }
+
+    .middle {
+        display: none;
     }
     
 }
