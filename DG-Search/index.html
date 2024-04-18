@@ -24,6 +24,7 @@
     <div class="left">
         <a href="https://chat.openai.com/" class="r-icons"><i class="fa-solid fa-robot"></i></a>
         <a href="https://www.youtube.com/" class="r-icons"><i class="fa-brands fa-youtube"></i></a>
+        <button id="popupButton" class="r-icons"><i class="fa-brands fa-spotify"></i></button>
         <a href="https://web.whatsapp.com/" class="r-icons"><i class="fa-brands fa-whatsapp"></i></a>
     </div>
     <div class="middle">
@@ -32,18 +33,26 @@
     <div class="right">
         <a href="https://mail.google.com/mail/" class="l-icons"><i class="fa-regular fa-envelope" style="font-size: 25px;"></i></a>
         <a href="https://calendar.google.com/" class="l-icons"><i class="fa-regular fa-calendar"></i></a>
-        <a href="#" class="l-icons" id="darkModeToggle"><i class="fa-solid fa-circle-half-stroke"></i></i></a>
+        <button class="l-icons" id="darkModeToggle"><i class="fa-solid fa-circle-half-stroke"></i></button>
     </div>
 </header>
 <div id="flexbox">
-    <h1 id="title">DG</h1>
-    <div class="search-container">
-        <form action="https://www.google.com/search" method="GET" class="search-form">
-            <input type="text" name="q" class="search-box" placeholder="Search...">
-            <button type="submit" class="search-button"><i class="fa-solid fa-magnifying-glass"></i></button>
-        </form>
+    <div class="left" style="height: 100%;">
+        <iframe id="popupDiv" style="border-radius:12px" src="https://open.spotify.com/embed/playlist/2cpQsJIF3ULoyb0lC25hVk?utm_source=generator&theme=0" width="50%" height="400px" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+   
     </div>
-
+    <div class="middle">
+        <h1 id="title">DG</h1>
+        <div class="search-container">
+            <form action="https://www.google.com/search" method="GET" class="search-form">
+                <input type="text" name="q" class="search-box" placeholder="Search...">
+                <button type="submit" class="search-button"><i class="fa-solid fa-magnifying-glass"></i></button>
+            </form>
+        </div>
+    </div>
+    <div class="right">
+        
+    </div>
 </div>
 <footer>
     <div class="left">

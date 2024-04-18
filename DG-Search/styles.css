@@ -4,12 +4,17 @@ body {
     font-size: 20px;
 }
 
+h1 {
+    margin: 0 0 0 0;
+}
+
 a {
     color: white;
 }
 
 button {
     all: unset;
+    cursor: pointer;
   }
 
 input {
@@ -20,7 +25,7 @@ input::placeholder {
     color: white;
   }
 
-button:hover {
+  .search-button:hover {
     background-color: white;
     color: black;
     border-radius: 100%;
@@ -51,7 +56,7 @@ header {
 
 .middle {
     display: flex;
-    flex: 1 1 0px;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
 }
@@ -72,10 +77,12 @@ header {
 
 .r-icons {
     margin: 0 15px 0 0;
+    z-index: 1;
 }
 
 .l-icons {
     margin: 0 0 0 15px;
+    z-index: 1;
 }
 
 #flexbox {
@@ -83,7 +90,7 @@ header {
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
+    flex-direction: row;
 }
 
 .search-form {
@@ -120,6 +127,11 @@ footer {
     border-top: 2px solid white;
 }
 
+#popupDiv {
+    display: none;
+    margin-top: 20px;
+  }
+
 @media screen and (max-width: 600px) {
 
     #flex-container {
@@ -135,6 +147,14 @@ footer {
         max-width: 300%;
         margin-top: 200px;
     }
+
+    #popupDiv {
+        width: 90%;
+        position: absolute;
+        margin-top: 100%;
+        height: 200px;
+    }
+
 
     
 }
