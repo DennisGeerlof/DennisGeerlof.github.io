@@ -15,3 +15,6 @@ setInterval(updateTime, 1000);
 document.getElementById('darkModeToggle').addEventListener('click', function() {
     document.body.classList.toggle('dark-mode');
 });
+
+
+
