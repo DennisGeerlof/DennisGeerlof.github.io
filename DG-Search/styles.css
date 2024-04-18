@@ -126,6 +126,15 @@ footer {
         height: 91vh;
     }
 
+   .middle {
+    position: absolute;
+   }
+
+    #logo-text {
+        max-width: 300%;
+        margin-top: 200px;
+    }
+
     
 }
 
