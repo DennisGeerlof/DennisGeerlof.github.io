@@ -70,7 +70,11 @@ header {
     max-width: 100%;
 }
 
-.icons {
+.r-icons {
+    margin: 0 15px 0 0;
+}
+
+.l-icons {
     margin: 0 0 0 15px;
 }
 
