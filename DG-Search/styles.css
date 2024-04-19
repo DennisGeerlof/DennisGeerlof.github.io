@@ -133,9 +133,7 @@ footer {
     z-index: 2;
   }
 
-  body.dark-mode *:not(#popupDiv):not(.l-icons):not(.r-icons) {
-    filter: invert(100%) !important;
-}
+ 
 
 
 
@@ -161,8 +159,6 @@ footer {
         margin-top: 100%;
         height: 200px;
     }
-
-
     
 }
 
