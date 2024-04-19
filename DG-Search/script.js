@@ -26,13 +26,3 @@ document.getElementById("popupButton").addEventListener("click", function() {
       popupDiv.style.display = "none";
     }
   });
-  
-  window.onload = function() {
-    // Get all links and buttons in the document
-    var links = document.querySelectorAll("a, button, form");
-
-    // Loop through each link/button and set target attribute to "_blank"
-    for (var i = 0; i < links.length; i++) {
-      links[i].setAttribute("target", "_blank");
-    }
-  };
