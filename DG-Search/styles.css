@@ -133,6 +133,12 @@ footer {
     z-index: 2;
   }
 
+  body.dark-mode *:not(#popupDiv):not(.l-icons):not(.r-icons) {
+    filter: invert(100%) !important;
+}
+
+
+
 @media screen and (max-width: 600px) {
 
     #flex-container {
