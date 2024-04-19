@@ -17,6 +17,7 @@ document.getElementById('darkModeToggle').addEventListener('click', function() {
     document.body.classList.toggle('dark-mode');
 });
 
+
 //Spotify pop-up
 document.getElementById("popupButton").addEventListener("click", function() {
     var popupDiv = document.getElementById("popupDiv");
