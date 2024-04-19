@@ -130,6 +130,7 @@ footer {
 #popupDiv {
     display: none;
     margin-top: 20px;
+    z-index: 2;
   }
 
 @media screen and (max-width: 600px) {
