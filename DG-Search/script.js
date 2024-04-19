@@ -19,7 +19,7 @@ document.getElementById('darkModeToggle').addEventListener('click', function() {
 
 
 //Spotify pop-up
-document.getElementById("popupButton").addEventListener("click", function() {
+document.getElementById("popupButton1").addEventListener("click", function() {
     var popupDiv = document.getElementById("popupDiv");
     if (popupDiv.style.display === "none" || popupDiv.style.display === "") {
       popupDiv.style.display = "block";
@@ -27,3 +27,13 @@ document.getElementById("popupButton").addEventListener("click", function() {
       popupDiv.style.display = "none";
     }
   });
+
+  //Pedro pop-up
+document.getElementById("popupButton2").addEventListener("click", function() {
+  var popupDiv = document.getElementById("Pedro");
+  if (popupDiv.style.display === "none" || popupDiv.style.display === "") {
+    popupDiv.style.display = "block";
+  } else {
+    popupDiv.style.display = "none";
+  }
+});
