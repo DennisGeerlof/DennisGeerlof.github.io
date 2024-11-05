@@ -15,7 +15,25 @@ setInterval(updateTime, 1000);
 // Darkmode
 document.getElementById('darkModeToggle').addEventListener('click', function() {
     document.body.classList.toggle('dark-mode');
+    
+    // Sla de huidige modus op in localStorage
+    if (document.body.classList.contains('dark-mode')) {
+        localStorage.setItem('theme', 'dark');
+    } else {
+        localStorage.setItem('theme', 'light');
+    }
 });
+
+// Controleer en pas de modus aan bij het laden van de pagina
+window.onload = function() {
+    let theme = localStorage.getItem('theme');
+    
+    if (theme === 'dark') {
+        document.body.classList.add('dark-mode');
+    } else {
+        document.body.classList.remove('dark-mode');
+    }
+};
 
 
 //Spotify pop-up
@@ -37,3 +55,5 @@ document.getElementById("popupButton2").addEventListener("click", function() {
     popupDiv.style.display = "none";
   }
 });
+
+
