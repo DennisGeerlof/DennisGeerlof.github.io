@@ -1,9 +1,13 @@
-* {
+body * {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    margin: 0;
     color: white;
+    margin: 0;
+}
+
+h1, h2, h3, p {
+    font-size: 300%;
 }
 
 body {
@@ -17,12 +21,10 @@ body {
 }
 
 .blue-glow {
-    font-size: 48px;
     text-shadow: 0 0 5px #00f, 0 0 10px #00f, 0 0 20px #00f, 0 0 40px #00f;
 }
 
 .pink-glow {
-    font-size: 48px;
     text-shadow: 0 0 5px #f0f, 0 0 10px #f0f, 0 0 20px #f0f, 0 0 40px #f0f;
 }
 
@@ -43,7 +45,13 @@ body {
 .info-column {
     background-color: rgba(0, 0, 0, 0.39);
     justify-content: flex-start;
-    padding: 10px;
+    padding: 35px 10px 10px 10px;
     margin: 10px;
     min-width: 405px;
+}
+
+.rondje {
+    border-radius: 100%;
+    min-width: 50px !important;
+    margin-bottom: -40px;
 }
