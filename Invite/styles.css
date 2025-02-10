@@ -6,10 +6,6 @@
     color: white;
 }
 
-title {
-    display: none;
-}
-
 body {
     background-color: black; /* Zwarte achtergrond voor beter glow-effect */
     background-image: url(achtergrond.webp);
