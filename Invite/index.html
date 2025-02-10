@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Birthday CD</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <link rel="shortcut icon" href="favicon.ico">
+    
+    <script defer>
+        document.addEventListener("DOMContentLoaded", function() {
+            // De doel-datum (14 maart 2025)
+            const targetDate = new Date("March 14, 2025 00:00:00").getTime();
+
+            // Update de countdown elke seconde
+            const interval = setInterval(function() {
+                // Huidige datum en tijd
+                const now = new Date().getTime();
+
+                // Bereken het verschil tussen de doel-datum en de huidige tijd
+                const distance = targetDate - now;
+
+                // Bereken dagen, uren, minuten en seconden
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                // Toon de countdown
+                document.getElementById("countdown").innerHTML = `${days} dagen ${hours} uur ${minutes} minuten ${seconds} seconden`;
+
+                // Als de countdown is afgelopen, laat een bericht zien
+                if (distance < 0) {
+                    clearInterval(interval);
+                    document.getElementById("countdown").innerHTML = "De dag is aangebroken!";
+                }
+            }, 1000);
+        });
+    </script>
+</head>
+<body>
+    <h1 class="blue-glow">Dennis</h1>
+    <h1 class="pink-glow">Celisa</h1>
+    <h2 id="countdown"></h2>
+
+    <div class="info-row">
+        <div class="blue-glow info-column box-blue">
+            <h3>Datum</h3>
+            <p> 14 maart 2025</p>
+        </div>
+        <div class="pink-glow info-column box-pink">
+            <h3>Locatie</h3>
+            <p>Goudse Rijweg 4<br>
+            2771 AE Boskoop</p>
+        </div>
+    </div>
+</body>
+</html>
