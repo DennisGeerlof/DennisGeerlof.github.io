@@ -100,6 +100,7 @@ body {
 
     .schrijf-in {
         margin-bottom: 20px;
+        width: 80% !important;
     }
 
     .hidden-mobile {
@@ -123,12 +124,7 @@ body {
     .rondje {
         min-width: 30px !important;
     }
-    
-    a > .box-pink {
-      width: 100% !important;
-      max-width: 400px !important;
-    }
-    
+
     h1, h2 {
       flex-direction: column !important;
     }
