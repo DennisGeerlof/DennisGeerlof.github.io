@@ -27,7 +27,7 @@
                 const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
                 // Toon de countdown
-                document.getElementById("countdown").innerHTML = `${days} dagen ${hours} uur ${minutes} minuten ${seconds} seconden`;
+                document.getElementById("countdown").innerHTML = `<span class="pink-glow">${days} dagen ${hours} uur</span>&nbsp<span class="blue-glow">${minutes} minuten ${seconds} seconden</span>`;
 
                 // Als de countdown is afgelopen, laat een bericht zien
                 if (distance < 0) {
@@ -39,30 +39,35 @@
     </script>
 </head>
 <body>
-    <h1 class="blue-glow">Dennis</h1>
-    <h1 class="pink-glow">Celisa</h1>
-    <h2 id="countdown" class="blue-glow"></h2>></h2>
+    <h2 style="flex-direction: row;"><span class="pink-glow">Je bent van harte uitgen</span><span class="grey-glow">o</span><span class="blue-glow">digd op onze verjaardag!</span></h1><br>
+    <h1 style="flex-direction: row;"><span class="pink-glow">Celisa</span><span class="grey-glow"> & </span><span class="blue-glow">Dennis</span></h1><br>
     <div class="info-row" style="gap: 14%; justify-content: center;">
-        <div class="blue-glow info-column box-blue rondje" style="padding: 50px;">
+        <div class="pink-glow info-column box-pink rondje" style="padding: 50px;">
             <h3>23</h3>
         </div>
-        <div class="pink-glow info-column box-pink rondje" style="padding: 50px;">
+        <div class="blue-glow info-column box-blue rondje" style="padding: 50px;">
             <h3>24</h3>
         </div>
     </div>
     <div class="info-row">
-        <div class="blue-glow info-column box-blue" style="min-height: 400px;">
-            <div class="box-blue" style="padding: 15px; border-radius: 10px;"></div>
-            <h3>Datum</h3>
-            <p> 14 maart 2025<br>
+        <div class="pink-glow info-column box-pink" style="min-height: 400px;">
+            <div class="box-pink" style="padding: 15px; border-radius: 10px;"></div><br><br>
+            <h3>Datum</h3><br><br>
+            <p> 14 maart 2025<br><br>
                 20:00 - 02:00</p>
         </div>
-        <div class="pink-glow info-column box-pink" style="min-height: 400px;">
-            <div class="box-pink" style="padding: 15px; border-radius: 10px;"></div>
-            <h3>Locatie</h3>
-            <p>Goudse Rijweg 4<br>
+        <div class="blue-glow info-column box-blue" style="min-height: 400px;">
+            <div class="box-blue" style="padding: 15px; border-radius: 10px;"></div><br><br>
+            <h3>Locatie</h3><br><br>
+            <p>Goudse Rijweg 4<br><br>
             2771 AE Boskoop</p>
         </div>
-    </div>
+    </div><br>
+    <h2 id="countdown" style="flex-direction: row;"></h2>></h2>
+    <a href="https://doodle.com/sign-up-sheet/participate/ca779748-bf8a-4072-a152-3fb088497c92/select" target="_blank" style="flex-direction: row;">
+        <div class="box-pink" style="padding: 15px; border-radius: 10px; width: 400px;">
+            <h3 class="blue-glow">Schrijf je in!</h3>
+        </div>
+    </a>
 </body>
 </html>
