@@ -27,7 +27,7 @@
                 const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
                 // Toon de countdown
-                document.getElementById("countdown").innerHTML = `<span class="pink-glow">${days} dagen ${hours} uur &nbsp</span><span class="blue-glow">${minutes} minuten ${seconds} seconden</span>`;
+                document.getElementById("countdown").innerHTML = `<span class="pink-glow">${days} dagen ${hours} uur&nbsp</span><span class="blue-glow">${minutes} minuten ${seconds} seconden</span>`;
 
                 // Als de countdown is afgelopen, laat een bericht zien
                 if (distance < 0) {
