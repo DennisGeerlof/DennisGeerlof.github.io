@@ -27,7 +27,7 @@
                 const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
                 // Toon de countdown
-                document.getElementById("countdown").innerHTML = `<span class="pink-glow">${days} dagen ${hours} uur</span>&nbsp<span class="blue-glow">${minutes} minuten ${seconds} seconden</span>`;
+                document.getElementById("countdown").innerHTML = `<span class="pink-glow">${days} dagen ${hours} uur &nbsp</span><span class="blue-glow">${minutes} minuten ${seconds} seconden</span>`;
 
                 // Als de countdown is afgelopen, laat een bericht zien
                 if (distance < 0) {
@@ -51,8 +51,8 @@
         </div>
     </div>
     <div class="info-row">
-        <div class="pink-glow info-column box-pink data-block" style="min-height: 400px;">
-            <div class="box-pink" style="padding: 15px; border-radius: 10px;"></div><br><br>
+        <div class="pink-glow info-column box-pink data-block" style="min-height: 350px;">
+            <div class="box-pink" style="padding: 15px; border-radius: 10px;"><p>14-03-2002</p></div><br><br>
             <h3>Datum</h3><br><br>
             <p> 14 maart 2025<br><br>
                 20:00 - 02:00</p>
@@ -60,8 +60,8 @@
         <div class="blue-glow info-column box-blue rondje hidden-desktop" style="padding: 50px;">
             <h3>24</h3>
         </div>
-        <div class="blue-glow info-column box-blue data-block" style="min-height: 400px;">
-            <div class="box-blue" style="padding: 15px; border-radius: 10px;"></div><br><br>
+        <div class="blue-glow info-column box-blue data-block" style="min-height: 350px;">
+            <div class="box-blue" style="padding: 15px; border-radius: 10px;"><p>17-03-2001</p></div><br><br>
             <h3>Locatie</h3><br><br>
             <p>Goudse Rijweg 4<br><br>
             2771 AE Boskoop</p>
@@ -70,7 +70,9 @@
     <h2 id="countdown" style="flex-direction: row;"></h2>></h2>
     <a href="https://doodle.com/sign-up-sheet/participate/ca779748-bf8a-4072-a152-3fb088497c92/select" target="_blank" style="flex-direction: row;">
         <div class="box-pink schrijf-in" style="padding: 15px; border-radius: 10px; width: 400px;">
-            <h3 class="blue-glow">Schrijf je in!</h3>
+            <h3 class="blue-glow">
+                Ben je erbij?<br>Klik hier!
+            </h3>
         </div>
     </a>
 </body>

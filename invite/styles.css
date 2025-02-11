@@ -1,5 +1,6 @@
 * {
     text-transform: uppercase;
+    font-family: 'NeonTubes', sans-serif;
 }
 
 body * {
@@ -8,6 +9,13 @@ body * {
     justify-content: center;
     color: white;
     margin: 0;
+}
+
+@font-face {
+    font-family: 'NeonTubes';
+    src: url('fonts/NeonTubes2.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
 }
 
 h1, h2, h3, p {
@@ -81,6 +89,11 @@ body {
 
 /* Mobile-only aanpassingen */
 @media (max-width: 600px) {
+
+    body {
+        margin-top: 20px;
+    }
+
     .CD {
         flex-direction: row !important;
     }
