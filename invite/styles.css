@@ -68,3 +68,45 @@ body {
 button {
     max-width: 20%;
 }
+
+.hidden-desktop {
+    display: none !important;
+}
+
+/* Mobile-only aanpassingen */
+@media (max-width: 600px) {
+    .hidden-mobile {
+        display: none;
+    }
+
+    .hidden-desktop {
+        display:inline !important;
+    }
+
+    .info-row {
+      flex-direction: column !important;
+      align-items: center;
+    }
+
+    .data-block {
+      min-width: 80% !important;
+    }
+
+    .rondje {
+        
+    }
+    
+    a > .box-pink {
+      width: 100% !important;
+      max-width: 400px !important;
+    }
+    
+    h1, h2 {
+      flex-direction: column !important;
+    }
+    
+    h1, h2, h3, p {
+      font-size: 150% !important;
+    }
+  }
+  
