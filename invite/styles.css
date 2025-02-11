@@ -24,6 +24,11 @@ body {
     margin-top: 40px;
 }
 
+.CD {
+    gap: 5px;
+}
+
+
 .schrijf-in {
     background-color: rgba(0, 0, 0, 0.39) !important;
 }
@@ -76,6 +81,10 @@ body {
 
 /* Mobile-only aanpassingen */
 @media (max-width: 600px) {
+    .CD {
+        flex-direction: row !important;
+    }
+
     .schrijf-in {
         margin-bottom: 20px;
     }
