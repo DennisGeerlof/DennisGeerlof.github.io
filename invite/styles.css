@@ -24,8 +24,8 @@ body {
     margin-top: 40px;
 }
 
-a {
-    background-color: rgba(0, 0, 0, 0.39);
+.schrijf-in {
+    background-color: rgba(0, 0, 0, 0.39) !important;
 }
 
 .blue-glow {
@@ -69,9 +69,6 @@ a {
     margin-bottom: -40px;
 }
 
-button {
-    max-width: 20%;
-}
 
 .hidden-desktop {
     display: none !important;
@@ -79,6 +76,10 @@ button {
 
 /* Mobile-only aanpassingen */
 @media (max-width: 600px) {
+    .schrijf-in {
+        margin-bottom: 20px;
+    }
+
     .hidden-mobile {
         display: none;
     }
