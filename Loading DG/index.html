@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loading DG</title>
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        background-color: black;
+    }
+
+    #loading, .row, .piece, .leeg {
+        display: flex;
+    }
+
+    #loading {
+        flex-direction: row;
+    }
+
+    .row {
+        flex-direction: column;
+    }
+
+    .piece, .leeg {
+        width: 100px;
+        height: 100px;
+        transition: transform 5s ease, filter 2s ease; /* Voor soepele overgangen */
+    }
+
+    .animate {
+        filter: invert(1);
+    }
+</style>
+<body>
+    <div id="loading">
+        <div class="row" id="r1">
+            <div class="piece" id="p1"><img src="cut/0/0x0.png" alt="1"></div>
+            <div class="piece" id="p2"><img src="cut/0/0x-100.png" alt="2"></div>
+            <div class="piece" id="p3"><img src="cut/0/0x-200.png" alt="3"></div>
+            <div class="leeg" id="p4"><img src="cut/0/0x-300.png" alt="4"></div>
+            <div class="leeg" id="p5"><img src="cut/0/0x-400.png" alt="5"></div>
+            <div class="leeg" id="p6"><img src="cut/0/0x-500.png" alt="6"></div>
+            <div class="leeg" id="p7"><img src="cut/0/0x-600.png" alt="7"></div>
+        </div>
+        <div class="row" id="r2">
+            <div class="leeg" id="p1"><img src="cut/-100/-100x0.png" alt="1"></div>
+            <div class="piece" id="p2"><img src="cut/-100/-100x-100.png" alt="2"></div>
+            <div class="piece" id="p3"><img src="cut/-100/-100x-200.png" alt="3"></div>
+            <div class="leeg" id="p4"><img src="cut/-100/-100x-300.png" alt="4"></div>
+            <div class="leeg" id="p5"><img src="cut/-100/-100x-400.png" alt="5"></div>
+            <div class="leeg" id="p6"><img src="cut/-100/-100x-500.png" alt="6"></div>
+            <div class="leeg" id="p7"><img src="cut/-100/-100x-600.png" alt="7"></div>
+        </div>
+        <div class="row" id="r3">
+            <div class="leeg" id="p1"><img src="cut/-200/-200x0.png" alt="1"></div>
+            <div class="piece" id="p2"><img src="cut/-200/-200x-100.png" alt="2"></div>
+            <div class="piece" id="p3"><img src="cut/-200/-200x-200.png" alt="3"></div>
+            <div class="piece" id="p4"><img src="cut/-200/-200x-300.png" alt="4"></div>
+            <div class="piece" id="p5"><img src="cut/-200/-200x-400.png" alt="5"></div>
+            <div class="piece" id="p6"><img src="cut/-200/-200x-500.png" alt="6"></div>
+            <div class="piece" id="p7"><img src="cut/-200/-200x-600.png" alt="7"></div>
+        </div>
+        <div class="row" id="r4">
+            <div class="leeg" id="p1"><img src="cut/-300/-300x0.png" alt="1"></div>
+            <div class="piece" id="p2"><img src="cut/-300/-300x-100.png" alt="2"></div>
+            <div class="piece" id="p3"><img src="cut/-300/-300x-200.png" alt="3"></div>
+            <div class="piece" id="p4"><img src="cut/-300/-300x-300.png" alt="4"></div>
+            <div class="piece" id="p5"><img src="cut/-300/-300x-400.png" alt="5"></div>
+            <div class="piece" id="p6"><img src="cut/-300/-300x-500.png" alt="6"></div>
+            <div class="piece" id="p7"><img src="cut/-300/-300x-600.png" alt="7"></div>
+        </div>
+        <div class="row" id="r5">
+            <div class="leeg" id="p1"><img src="cut/-400/-400x0.png" alt="1"></div>
+            <div class="piece" id="p2"><img src="cut/-400/-400x-100.png" alt="2"></div>
+            <div class="piece" id="p3"><img src="cut/-400/-400x-200.png" alt="3"></div>
+            <div class="piece" id="p4"><img src="cut/-400/-400x-300.png" alt="4"></div>
+            <div class="piece" id="p5"><img src="cut/-400/-400x-400.png" alt="5"></div>
+            <div class="piece" id="p6"><img src="cut/-400/-400x-500.png" alt="6"></div>
+            <div class="piece" id="p7"><img src="cut/-400/-400x-600.png" alt="7"></div>
+        </div>
+        <div class="row" id="r6">
+            <div class="leeg" id="p1"><img src="cut/-500/-500x0.png" alt="1"></div>
+            <div class="piece" id="p2"><img src="cut/-500/-500x-100.png" alt="2"></div>
+            <div class="piece" id="p3"><img src="cut/-500/-500x-200.png" alt="3"></div>
+            <div class="leeg" id="p4"><img src="cut/-500/-500x-300.png" alt="4"></div>
+            <div class="leeg" id="p5"><img src="cut/-500/-500x-400.png" alt="5"></div>
+            <div class="leeg" id="p6"><img src="cut/-500/-500x-500.png" alt="6"></div>
+            <div class="leeg" id="p7"><img src="cut/-500/-500x-600.png" alt="7"></div>
+        </div>
+        <div class="row" id="r7">
+            <div class="piece" id="p1"><img src="cut/-600/-600x0.png" alt="1"></div>
+            <div class="piece" id="p2"><img src="cut/-600/-600x-100.png" alt="2"></div>
+            <div class="piece" id="p3"><img src="cut/-600/-600x-200.png" alt="3"></div>
+            <div class="leeg" id="p4"><img src="cut/-600/-600x-300.png" alt="4"></div>
+            <div class="leeg" id="p5"><img src="cut/-600/-600x-400.png" alt="5"></div>
+            <div class="leeg" id="p6"><img src="cut/-600/-600x-500.png" alt="6"></div>
+            <div class="leeg" id="p7"><img src="cut/-600/-600x-600.png" alt="7"></div>
+        </div>
+    </div>
+    <script>
+        // Select all pieces
+        const pieces = document.querySelectorAll(".piece");
+    
+        // Function to animate pieces with staggered delays
+        function animatePieces() {
+            pieces.forEach((piece, index) => {
+                // Calculate delay based on the reverse order of the pieces
+                const delay = (pieces.length - index - 1) * 100; // 100ms delay between each piece
+    
+                setTimeout(() => {
+                    piece.classList.add("animate"); // Add animation class
+                    setTimeout(() => {
+                        piece.classList.remove("animate"); // Remove the class after 1 second
+                    }, 5000); // Animation duration of 1 second
+                }, delay); // Apply the calculated delay
+            });
+        }
+    
+        // Repeat the animation every 3 seconds
+        setInterval(animatePieces, 8000);
+    </script>
+    
+</body>
+</html>
