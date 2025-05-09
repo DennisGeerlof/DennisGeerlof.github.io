@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loading DG</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        height: 100vh;
+        width: 100vw;
+        background-color: black;
+        justify-content: center;
+    }
+
+    #loading, .row, .piece, .leeg {
+        display: flex;
+    }
+
+    #loading {
+        height: 100vh;
+        width: 100vw;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .row {
+        flex-direction: column;
+    }
+
+    @keyframes internalGlow {
+        0%, 100% {
+            filter: brightness(1) drop-shadow(0 0 2px white);
+            opacity: 0.9;
+        }
+        50% {
+            filter: brightness(1.6) drop-shadow(0 0 15px white);
+            opacity: 1;
+        }
+    }
+
+    #r1 img {
+        animation: internalGlow 2s infinite ease-in-out;
+    }
+
+</style>
+<body>
+    <div id="loading">
+        <div class="row" id="r1">
+            <img src="cut/DG-white.png" alt="full">
+        </div>
+    </div>    
+</body>
+</html>
