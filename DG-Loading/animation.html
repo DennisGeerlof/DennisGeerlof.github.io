@@ -71,12 +71,62 @@
         }
     }
 
+    .smoke-container {
+        display: flex;
+        flex-direction: row;
+        position: absolute;
+        top: 80%; /* higher than before */
+        left: 50%;
+        transform: translate(-50%, -50%);
+        overflow: visible;
+        pointer-events: none;
+    }
+
+    .smoke {
+    width: 120px;
+    height: 200px;
+    background: radial-gradient(ellipse at bottom, white 0%, rgba(0, 0, 0, 0) 70%);
+    opacity: 0;
+    animation: smokeFall 4s ease-out forwards;
+    filter: blur(6px);
+    transform-origin: top center;
+    animation-delay: 2s;
+}
+
+.smoke-wrapper {
+    transform: scaleX(-1);
+}
+
+
+
+    @keyframes smokeFall {
+        0% {
+            opacity: 0;
+            transform: translateY(0) scale(1) skewX(-15deg);
+        }
+        20% {
+            opacity: 0.8;
+        }
+        100% {
+            opacity: 0;
+            transform: translateY(100px) scale(1.3) skewX(-15deg);
+        }
+    }
+
+
 </style>
 <body>
     <div id="loading">
         <div class="row" id="r1">
             <img src="cut/DG-white.png" alt="full" id="animation">
             <img src="cut/eyes.png" alt="Eyes" id="eyes">
+            <div class="smoke-container">
+    <div class="smoke"></div>
+    <div class="smoke-wrapper">
+        <div class="smoke"></div>
+    </div>
+</div>
+
         </div>
     </div>    
 </body>
