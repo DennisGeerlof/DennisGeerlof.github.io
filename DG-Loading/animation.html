@@ -36,16 +36,16 @@
 
     @keyframes internalGlow {
         0%, 100% {
-            filter: brightness(1) drop-shadow(0 0 2px white);
+            filter: brightness(1) drop-shadow(0 0 2px red);
             opacity: 0.9;
         }
         50% {
-            filter: brightness(1.6) drop-shadow(0 0 15px white);
+            filter: brightness(1.6) drop-shadow(0 0 15px red);
             opacity: 1;
         }
     }
 
-    #r1 img {
+    #animation {
         animation: internalGlow 2s infinite ease-in-out;
     }
 
@@ -53,7 +53,7 @@
 <body>
     <div id="loading">
         <div class="row" id="r1">
-            <img src="cut/DG-white.png" alt="full">
+            <img src="cut/DG-white.png" alt="full" id="animation">
         </div>
     </div>    
 </body>
