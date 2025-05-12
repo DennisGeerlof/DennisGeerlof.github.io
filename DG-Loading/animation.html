@@ -12,6 +12,7 @@
     }
 
     body {
+        overflow: hidden;
         height: 100vh;
         width: 100vw;
         background-color: black;
@@ -34,26 +35,25 @@
         flex-direction: column;
     }
 
-    @keyframes internalGlow {
-        0%, 100% {
-            filter: brightness(1) drop-shadow(0 0 2px red);
-            opacity: 0.9;
-        }
-        50% {
-            filter: brightness(1.6) drop-shadow(0 0 15px red);
-            opacity: 1;
+    #animation {
+        transform: translate( 400%, 0%) scale(10);
+        animation: scaleDown 100ms ease-out forwards;
+        animation-delay: 1s;
+        filter: brightness(1.6) drop-shadow(0 0 15px white);
+    }
+
+    @keyframes scaleDown {
+        to {
+            transform: translate(0%, 0%) scale(1);
         }
     }
 
-    #animation {
-        animation: internalGlow 2s infinite ease-in-out;
-    }
 
     #eyes {
         position: absolute;
         opacity: 0;
         animation: easeInOut 4s ease-in-out forwards;
-        animation-delay: 2s; /* Wait 2s before starting */
+        animation-delay: 1s;
     }
 
     @keyframes easeInOut {
