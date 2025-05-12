@@ -49,11 +49,34 @@
         animation: internalGlow 2s infinite ease-in-out;
     }
 
+    #eyes {
+        position: absolute;
+        opacity: 0;
+        animation: easeInOut 4s ease-in-out forwards;
+        animation-delay: 2s; /* Wait 2s before starting */
+    }
+
+    @keyframes easeInOut {
+        0%, 25% { /* 0s–1s: still invisible */
+            opacity: 0;
+            filter: brightness(1) drop-shadow(0 0 0 red);
+        }
+        50% { /* 2s–3s: fully visible */
+            opacity: 1;
+            filter: brightness(1.6) drop-shadow(0 0 15px red);
+        }
+        100% { /* 3s–4s: faded out again */
+            opacity: 0;
+            filter: brightness(1) drop-shadow(0 0 0 red);
+        }
+    }
+
 </style>
 <body>
     <div id="loading">
         <div class="row" id="r1">
             <img src="cut/DG-white.png" alt="full" id="animation">
+            <img src="cut/eyes.png" alt="Eyes" id="eyes">
         </div>
     </div>    
 </body>
