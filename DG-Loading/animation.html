@@ -48,24 +48,23 @@
         }
     }
 
-
     #eyes {
         position: absolute;
         opacity: 0;
-        animation: easeInOut 4s ease-in-out forwards;
+        animation: easeInOut 3.5s ease-in-out forwards;
         animation-delay: 1s;
     }
 
     @keyframes easeInOut {
-        0%, 25% { /* 0s–1s: still invisible */
+        0%, 25% {
             opacity: 0;
             filter: brightness(1) drop-shadow(0 0 0 red);
         }
-        50% { /* 2s–3s: fully visible */
+        50% {
             opacity: 1;
             filter: brightness(1.6) drop-shadow(0 0 15px red);
         }
-        100% { /* 3s–4s: faded out again */
+        100% {
             opacity: 0;
             filter: brightness(1) drop-shadow(0 0 0 red);
         }
@@ -75,7 +74,7 @@
         display: flex;
         flex-direction: row;
         position: absolute;
-        top: 80%; /* higher than before */
+        top: 80%;
         left: 50%;
         transform: translate(-50%, -50%);
         overflow: visible;
@@ -102,14 +101,14 @@
     @keyframes smokeFall {
         0% {
             opacity: 0;
-            transform: translateY(0) scale(1) skewX(-15deg);
+            transform: translateY(0) translateX(50px) scale(1) skewX(-15deg);
         }
         20% {
             opacity: 0.8;
         }
         100% {
             opacity: 0;
-            transform: translateY(100px) scale(1.3) skewX(-15deg);
+            transform: translateY(100px) translateX(0) scale(1.3) skewX(-15deg);
         }
     }
 
