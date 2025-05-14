@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Daily Workout Tracker</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f5f5f5;
+    }
+    .container {
+      padding: 20px;
+    }
+    h1 {
+      text-align: center;
+    }
+    .workout {
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+    .exercise {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 0;
+      border-bottom: 1px solid #ddd;
+    }
+    .exercise:last-child {
+      border-bottom: none;
+    }
+    .progress-section {
+      overflow-x: auto;
+      white-space: nowrap;
+    }
+    .progress {
+      display: inline-block;
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      padding: 20px;
+      min-width: 300px;
+      margin-right: 10px;
+    }
+    label {
+      display: flex;
+      align-items: center;
+    }
+    input[type="checkbox"] {
+      margin-right: 10px;
+    }
+    a.exercise-link {
+      color: #007bff;
+      text-decoration: none;
+    }
+    a.exercise-link:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1 id="day-title">Workout</h1>
+    <div class="workout" id="workout-list"></div>
+
+    <h2>Progress</h2>
+    <div class="progress-section" id="progress-section">
+      <!-- Swipable Progress Panels -->
+    </div>
+  </div>
+
+  <script>
+    const exerciseLinks = {
+      "Dumbbell Floor Press": "https://www.youtube.com/watch?v=6nDNUeQGz-Y",
+      "Incline Push-up with Weighted Vest": "https://www.youtube.com/watch?v=R08gYyypGto",
+      "Seated Dumbbell Shoulder Press": "https://www.youtube.com/watch?v=B-aVuyhvLHU",
+      "Lateral Raises with Elastics": "https://www.youtube.com/watch?v=3VcKaXpzqRo",
+      "Overhead Triceps Extension": "https://www.youtube.com/watch?v=_gsUck-7M74",
+      "Triceps Kickbacks with Elastics": "https://www.youtube.com/watch?v=6SS0qFj7t8c",
+      "Bent-over Dumbbell Rows": "https://www.youtube.com/watch?v=vT2GjY_Umpw",
+      "Dumbbell Pullovers": "https://www.youtube.com/watch?v=HGDGVpG4pCE",
+      "Face Pulls with Elastics": "https://www.youtube.com/watch?v=kqgR-Zj0gDc",
+      "Bicep Curls with Dumbbells": "https://www.youtube.com/watch?v=ykJmrZ5v0Oo",
+      "Hammer Curls with Elastics": "https://www.youtube.com/watch?v=zC3nLlEvin4",
+      "Shrugs with Dumbbells": "https://www.youtube.com/watch?v=R8eCE5BFtJ4",
+      "Goblet Squats": "https://www.youtube.com/watch?v=6xwGFn-J_QA",
+      "Bulgarian Split Squats": "https://www.youtube.com/watch?v=2C-uNgKwPLE",
+      "Romanian Deadlifts": "https://www.youtube.com/watch?v=2SHsk9AzdjA",
+      "Glute Bridges": "https://www.youtube.com/watch?v=m2Zx-57cSok",
+      "Standing Calf Raises": "https://www.youtube.com/watch?v=-M4-G8p8fmc",
+      "Plank": "https://www.youtube.com/watch?v=pSHjTRCQxIw"
+    };
+
+    const workouts = {
+      Monday: [
+        ["Dumbbell Floor Press", "4 sets x 8–12"],
+        ["Incline Push-up with Weighted Vest", "3 sets x 10–15"],
+        ["Seated Dumbbell Shoulder Press", "3 sets x 8–12"],
+        ["Lateral Raises with Elastics", "3 sets x 12–15"],
+        ["Overhead Triceps Extension", "3 sets x 10–12"],
+        ["Triceps Kickbacks with Elastics", "3 sets x 12–15"]
+      ],
+      Tuesday: [
+        ["Bent-over Dumbbell Rows", "4 sets x 8–12"],
+        ["Dumbbell Pullovers", "3 sets x 10–12"],
+        ["Face Pulls with Elastics", "3 sets x 12–15"],
+        ["Bicep Curls with Dumbbells", "3 sets x 10–12"],
+        ["Hammer Curls with Elastics", "3 sets x 12–15"],
+        ["Shrugs with Dumbbells", "3 sets x 12–15"]
+      ],
+      Wednesday: [
+        ["Goblet Squats", "4 sets x 10–15"],
+        ["Bulgarian Split Squats", "3 sets x 8–12 per leg"],
+        ["Romanian Deadlifts", "3 sets x 10–12"],
+        ["Glute Bridges", "3 sets x 12–15"],
+        ["Standing Calf Raises", "4 sets x 15–20"],
+        ["Plank", "3 sets of 60s"]
+      ],
+      Thursday: [],
+      Friday: [],
+      Saturday: [],
+      Sunday: []
+    };
+
+    workouts.Thursday = workouts.Monday;
+    workouts.Friday = workouts.Tuesday;
+    workouts.Saturday = workouts.Wednesday;
+
+    const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+    const today = new Date();
+    const todayName = days[today.getDay()];
+
+    document.getElementById("day-title").innerText = todayName + " Workout";
+    const workoutList = document.getElementById("workout-list");
+    workouts[todayName].forEach(([name, sets]) => {
+      const div = document.createElement("div");
+      div.className = "exercise";
+      const url = exerciseLinks[name] || "#";
+      div.innerHTML = `<label><input type="checkbox"><a href="${url}" target="_blank" class="exercise-link">${name}</a></label><span>${sets}</span>`;
+      workoutList.appendChild(div);
+    });
+
+    const progressSection = document.getElementById("progress-section");
+    days.forEach(day => {
+      const panel = document.createElement("div");
+      panel.className = "progress";
+      panel.innerHTML = `<strong>${day}</strong><ul>` +
+        workouts[day].map(([name]) => `<li><a href="${exerciseLinks[name] || '#'}" target="_blank" class="exercise-link">${name}</a></li>`).join("") +
+        `</ul>`;
+      progressSection.appendChild(panel);
+    });
+  </script>
+</body>
+</html>
