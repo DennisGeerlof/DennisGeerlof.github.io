@@ -112,7 +112,7 @@ button:hover {
 /* Responsive tweaks */
 @media (max-width: 600px) {
   #display {
-    font-size: 15rem;
+    font-size: 10rem;
   }
 
   .players {
