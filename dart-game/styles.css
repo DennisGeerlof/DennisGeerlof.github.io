@@ -1,57 +1,73 @@
+/* Reset and base font */
 * {
   font-family: 'Times New Roman', Times, serif;
+  box-sizing: border-box;
 }
 
 body {
   background-color: #000;
   color: white;
+  margin: 0;
+  padding: 20px;
+  min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  height: 100vh;
-  margin: 0;
-  padding: 20px;
 }
 
 .container {
   text-align: center;
-  max-width: 600px;
   width: 100%;
+  max-width: 600px;
+  padding: 0 10px;
 }
 
+/* Inputs and buttons */
 input {
-  font-size: 20px;
+  font-size: 1.2rem; /* smaller on desktop, easier on mobile */
   text-align: center;
   margin: 10px 0;
-  padding: 5px;
+  padding: 8px;
+  width: 100%;
+  max-width: 280px; /* don’t get too wide on desktop */
+  border-radius: 4px;
+  border: none;
 }
 
 button {
-  font-size: 24px;
+  font-size: 1.2rem;
   margin: 5px;
-  padding: 5px 15px;
+  padding: 10px 20px;
   cursor: pointer;
+  border-radius: 5px;
+  border: none;
+  background-color: #333;
+  color: white;
+  transition: background-color 0.3s ease;
 }
 
+button:hover {
+  background-color: #555;
+}
+
+/* Dart icons container */
 .dart-row {
   display: flex;
   justify-content: center;
   gap: 10px;
   margin: 10px 0;
+  flex-wrap: wrap; /* wraps if needed */
 }
 
 .dart {
-  font-size: 40px;
+  font-size: 2.5rem;
 }
 
-.controls {
-  margin-bottom: 20px;
-}
-
+/* Display area for countdown and spinning numbers */
 #display {
-  font-size: 120px;
+  font-size: 6rem;
   font-weight: bold;
-  margin-bottom: 20px;
+  margin: 20px 0;
   height: 140px;
   display: flex;
   justify-content: center;
@@ -69,11 +85,13 @@ button {
   color: limegreen;
 }
 
+/* Players container: side-by-side on desktop, stacked on mobile */
 .players {
   display: flex;
   justify-content: center;
   gap: 40px;
   margin: 20px 0;
+  flex-wrap: wrap;
 }
 
 .player {
@@ -81,4 +99,38 @@ button {
   flex-direction: column;
   align-items: center;
   min-width: 200px;
+  flex: 1 1 200px;
+}
+
+/* Controls under each player */
+.controls {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+/* Responsive tweaks */
+@media (max-width: 600px) {
+  #display {
+    font-size: 4rem;
+    height: 100px;
+  }
+
+  .players {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .player {
+    width: 100%;
+    min-width: unset;
+  }
+
+  input {
+    max-width: 100%;
+  }
+
+  button {
+    width: 48%;
+  }
 }
