@@ -30,12 +30,15 @@ input {
   padding: 8px;
   width: 100%;
   max-width: 280px; /* don’t get too wide on desktop */
-  border-radius: 4px;
+  border-radius: 10px;
   border: none;
+  color: #fff;
+  background-color: #000;
+  border: 1px solid #fff;
 }
 
 button {
-  font-size: 1.2rem;
+  font-size: 2rem;
   margin: 5px;
   padding: 10px 20px;
   cursor: pointer;
@@ -67,8 +70,6 @@ button:hover {
 #display {
   font-size: 6rem;
   font-weight: bold;
-  margin: 20px 0;
-  height: 140px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -111,8 +112,7 @@ button:hover {
 /* Responsive tweaks */
 @media (max-width: 600px) {
   #display {
-    font-size: 8rem;
-    height: 100px;
+    font-size: 15rem;
   }
 
   .players {
