@@ -1,0 +1,28 @@
+body {
+  font-family: 'Times New Roman', Times, serif;
+  background-color: #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+.container {
+  text-align: center;
+}
+
+button {
+  padding: 10px 20px;
+  font-size: 32px;
+  cursor: pointer;
+}
+
+#display {
+  font-size: 300px;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+}
