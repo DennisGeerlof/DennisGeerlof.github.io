@@ -1,48 +1,108 @@
-// Get references to the button and display elements from the HTML
+// Spinner setup
 const startButton = document.getElementById('startButton');
 const display = document.getElementById('display');
 
-// Add an event listener to the start button to begin the countdown when clicked
-startButton.addEventListener('click', () => {
-  countdown(3); // Start countdown from 3
-});
+// Dart system setup
+const totalRounds = 5;
+let dartsLeft = totalRounds;
+let score1 = 0;
+let score2 = 0;
 
-// Helper function to change the CSS class of the display for different visual states
+const availableDarts = document.getElementById('availableDarts');
+const player1Darts = document.getElementById('player1Darts');
+const player2Darts = document.getElementById('player2Darts');
+
+const add1 = document.getElementById('add1');
+const sub1 = document.getElementById('sub1');
+const add2 = document.getElementById('add2');
+const sub2 = document.getElementById('sub2');
+
+// Display styling
 function setDisplayClass(className) {
-  display.className = ''; // Clear any existing class
-  display.classList.add(className); // Apply the new class
+  display.className = '';
+  display.classList.add(className);
 }
 
-// Countdown function that updates the display every second
+// Spinner logic
+startButton.addEventListener('click', () => {
+  countdown(3);
+});
+
 function countdown(count) {
-  setDisplayClass('countdown'); // Set text color to white
-  display.textContent = count; // Show current countdown number
+  setDisplayClass('countdown');
+  display.textContent = count;
 
   if (count > 0) {
-    // Wait 1 second, then call countdown again with a lower number
     setTimeout(() => countdown(count - 1), 1000);
   } else {
-    // When countdown hits 0, start the spinning animation
     spinNumbers();
   }
 }
 
-// Function to simulate spinning numbers and then stop at a random number
 function spinNumbers() {
-  setDisplayClass('spinning'); // Set text color to red
-  const spinDuration = Math.floor(Math.random() * 5 + 1) * 1000; // Duration between 1 and 5 seconds
+  setDisplayClass('spinning');
+  const spinDuration = Math.floor(Math.random() * 5 + 1) * 1000;
 
-  // Start changing the displayed number rapidly (every 100ms)
   const spinner = setInterval(() => {
-    const number = Math.floor(Math.random() * 20 + 1); // Random number from 1 to 20
+    const number = Math.floor(Math.random() * 20 + 1);
     display.textContent = number;
   }, 100);
 
-  // After spinDuration, stop spinning and display the final number
   setTimeout(() => {
-    clearInterval(spinner); // Stop the interval
-    const finalNumber = Math.floor(Math.random() * 20 + 1); // Final random number
-    setDisplayClass('final'); // Set text color to green
+    clearInterval(spinner);
+    const finalNumber = Math.floor(Math.random() * 20 + 1);
+    setDisplayClass('final');
     display.textContent = finalNumber;
   }, spinDuration);
 }
+
+// Dart rendering
+function renderDarts(container, count) {
+  container.innerHTML = '';
+  for (let i = 0; i < count; i++) {
+    const dart = document.createElement('span');
+    dart.textContent = '🎯';
+    dart.className = 'dart';
+    container.appendChild(dart);
+  }
+}
+
+function updateUI() {
+  renderDarts(availableDarts, dartsLeft);
+  renderDarts(player1Darts, score1);
+  renderDarts(player2Darts, score2);
+}
+
+// Scoring logic
+function addScore(player) {
+  if (dartsLeft === 0) return;
+
+  if (player === 1 && score1 < totalRounds) {
+    score1++;
+    dartsLeft--;
+  } else if (player === 2 && score2 < totalRounds) {
+    score2++;
+    dartsLeft--;
+  }
+  updateUI();
+}
+
+function subtractScore(player) {
+  if (player === 1 && score1 > 0) {
+    score1--;
+    dartsLeft++;
+  } else if (player === 2 && score2 > 0) {
+    score2--;
+    dartsLeft++;
+  }
+  updateUI();
+}
+
+// Button events
+add1.addEventListener('click', () => addScore(1));
+sub1.addEventListener('click', () => subtractScore(1));
+add2.addEventListener('click', () => addScore(2));
+sub2.addEventListener('click', () => subtractScore(2));
+
+// Initial render
+updateUI();

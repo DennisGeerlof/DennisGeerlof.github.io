@@ -1,16 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Random Number Spinner</title>
-  <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dart Game</title>
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
   <div class="container">
-    <div id="display"></div>
+    <!-- Available darts (top row) -->
+    <div id="availableDarts" class="dart-row"></div>
+
+  <div class="players">
+    <!-- Player 1 -->
+    <div class="player">
+      <input type="text" id="player1Name" placeholder="Player 1" />
+      <div id="player1Darts" class="dart-row"></div>
+      <div class="controls">
+        <button id="add1">+1</button>
+        <button id="sub1">−1</button>
+      </div>
+    </div>
+
+    <!-- Player 2 -->
+    <div class="player">
+      <input type="text" id="player2Name" placeholder="Player 2" />
+      <div id="player2Darts" class="dart-row"></div>
+      <div class="controls">
+        <button id="add2">+1</button>
+        <button id="sub2">−1</button>
+      </div>
+    </div>
+    </div>
+
+      <!-- Countdown / Spinner Display -->
+    <div id="display" class="countdown">Ready</div>
     <button id="startButton">Start</button>
   </div>
+
   <script src="script.js"></script>
 </body>
 </html>

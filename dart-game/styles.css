@@ -1,42 +1,84 @@
-body {
+* {
   font-family: 'Times New Roman', Times, serif;
+}
+
+body {
   background-color: #000;
+  color: white;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   height: 100vh;
   margin: 0;
+  padding: 20px;
 }
 
 .container {
   text-align: center;
+  max-width: 600px;
+  width: 100%;
+}
+
+input {
+  font-size: 20px;
+  text-align: center;
+  margin: 10px 0;
+  padding: 5px;
 }
 
 button {
-  padding: 10px 20px;
-  font-size: 32px;
+  font-size: 24px;
+  margin: 5px;
+  padding: 5px 15px;
   cursor: pointer;
 }
 
+.dart-row {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin: 10px 0;
+}
+
+.dart {
+  font-size: 40px;
+}
+
+.controls {
+  margin-bottom: 20px;
+}
+
 #display {
-  font-size: 300px;
+  font-size: 120px;
   font-weight: bold;
+  margin-bottom: 20px;
+  height: 140px;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 300px;
   transition: color 0.2s ease;
 }
 
-/* Color states */
 .countdown {
   color: white;
 }
-
 .spinning {
   color: red;
 }
-
 .final {
   color: limegreen;
+}
+
+.players {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  margin: 20px 0;
+}
+
+.player {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 200px;
 }
