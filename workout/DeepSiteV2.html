@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Workout Progress Tracker</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .fade-in {
+            animation: fadeIn 0.3s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        .exercise-item:hover .edit-btn {
+            opacity: 1;
+        }
+        .edit-btn {
+            opacity: 0;
+            transition: opacity 0.2s ease;
+        }
+        .progress-bar {
+            height: 8px;
+            border-radius: 4px;
+            background-color: #e5e7eb;
+        }
+        .progress-fill {
+            height: 100%;
+            border-radius: 4px;
+            background-color: #3b82f6;
+            transition: width 0.3s ease;
+        }
+        .chart-container {
+            height: 300px;
+        }
+        [contenteditable="true"] {
+            border-bottom: 1px dashed #3b82f6;
+            padding: 0 2px;
+            outline: none;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <div class="container mx-auto px-4 py-8 max-w-6xl">
+        <header class="mb-8 text-center">
+            <h1 class="text-4xl font-bold text-blue-600 mb-2">Workout Progress Tracker</h1>
+            <p class="text-gray-600">Track your workouts and see your progress over time</p>
+        </header>
+
+        <div class="bg-white rounded-xl shadow-md overflow-hidden mb-8">
+            <div class="flex border-b border-gray-200">
+                <button class="tab-btn px-6 py-3 font-medium text-gray-600 hover:text-blue-600 focus:outline-none border-b-2 border-transparent hover:border-blue-300 transition-all" data-tab="today">Today's Workout</button>
+                <button class="tab-btn px-6 py-3 font-medium text-gray-600 hover:text-blue-600 focus:outline-none border-b-2 border-transparent hover:border-blue-300 transition-all" data-tab="weekly">Weekly Plan</button>
+                <button class="tab-btn px-6 py-3 font-medium text-gray-600 hover:text-blue-600 focus:outline-none border-b-2 border-transparent hover:border-blue-300 transition-all" data-tab="analytics">Analytics</button>
+                <button class="tab-btn px-6 py-3 font-medium text-gray-600 hover:text-blue-600 focus:outline-none border-b-2 border-transparent hover:border-blue-300 transition-all" data-tab="equipment">Equipment</button>
+            </div>
+
+            <!-- Today's Workout Tab -->
+            <div id="today" class="tab-content p-6 fade-in active">
+                <h2 class="text-2xl font-semibold mb-4" id="today-title">Today's Workout</h2>
+                <div class="mb-6">
+                    <div class="progress-bar mb-2">
+                        <div class="progress-fill" id="today-progress" style="width: 0%"></div>
+                    </div>
+                    <div class="flex justify-between text-sm text-gray-600">
+                        <span>0% completed</span>
+                        <span id="today-stats">0/0 exercises</span>
+                    </div>
+                </div>
+                <div id="today-exercises" class="space-y-4">
+                    <!-- Exercises will be loaded here -->
+                </div>
+                <button id="save-today" class="mt-6 bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg transition-colors">
+                    <i class="fas fa-save mr-2"></i>Save Progress
+                </button>
+            </div>
+
+            <!-- Weekly Plan Tab -->
+            <div id="weekly" class="tab-content p-6 fade-in">
+                <h2 class="text-2xl font-semibold mb-4">Weekly Workout Plan</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="day-card bg-white rounded-lg border border-gray-200 overflow-hidden shadow-sm" data-day="monday">
+                        <div class="bg-blue-600 px-4 py-2">
+                            <h3 class="font-semibold text-white">Monday - Push</h3>
+                        </div>
+                        <div class="p-4 exercises-container" id="monday-exercises">
+                            <!-- Exercises will be loaded here -->
+                        </div>
+                    </div>
+                    <div class="day-card bg-white rounded-lg border border-gray-200 overflow-hidden shadow-sm" data-day="tuesday">
+                        <div class="bg-green-600 px-4 py-2">
+                            <h3 class="font-semibold text-white">Tuesday - Pull</h3>
+                        </div>
+                        <div class="p-4 exercises-container" id="tuesday-exercises">
+                            <!-- Exercises will be loaded here -->
+                        </div>
+                    </div>
+                    <div class="day-card bg-white rounded-lg border border-gray-200 overflow-hidden shadow-sm" data-day="wednesday">
+                        <div class="bg-purple-600 px-4 py-2">
+                            <h3 class="font-semibold text-white">Wednesday - Legs</h3>
+                        </div>
+                        <div class="p-4 exercises-container" id="wednesday-exercises">
+                            <!-- Exercises will be loaded here -->
+                        </div>
+                    </div>
+                    <div class="day-card bg-white rounded-lg border border-gray-200 overflow-hidden shadow-sm" data-day="thursday">
+                        <div class="bg-blue-600 px-4 py-2">
+                            <h3 class="font-semibold text-white">Thursday - Push</h3>
+                        </div>
+                        <div class="p-4 exercises-container" id="thursday-exercises">
+                            <!-- Exercises will be loaded here -->
+                        </div>
+                    </div>
+                    <div class="day-card bg-white rounded-lg border border-gray-200 overflow-hidden shadow-sm" data-day="friday">
+                        <div class="bg-green-600 px-4 py-2">
+                            <h3 class="font-semibold text-white">Friday - Pull</h3>
+                        </div>
+                        <div class="p-4 exercises-container" id="friday-exercises">
+                            <!-- Exercises will be loaded here -->
+                        </div>
+                    </div>
+                    <div class="day-card bg-white rounded-lg border border-gray-200 overflow-hidden shadow-sm" data-day="saturday">
+                        <div class="bg-purple-600 px-4 py-2">
+                            <h3 class="font-semibold text-white">Saturday - Legs</h3>
+                        </div>
+                        <div class="p-4 exercises-container" id="saturday-exercises">
+                            <!-- Exercises will be loaded here -->
+                        </div>
+                    </div>
+                    <div class="day-card bg-white rounded-lg border border-gray-200 overflow-hidden shadow-sm" data-day="sunday">
+                        <div class="bg-gray-600 px-4 py-2">
+                            <h3 class="font-semibold text-white">Sunday - Rest</h3>
+                        </div>
+                        <div class="p-4 exercises-container" id="sunday-exercises">
+                            <!-- Exercises will be loaded here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Analytics Tab -->
+            <div id="analytics" class="tab-content p-6 fade-in">
+                <h2 class="text-2xl font-semibold mb-6">Workout Analytics</h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                    <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+                        <h3 class="font-medium text-lg mb-4">Weekly Completion</h3>
+                        <div class="chart-container">
+                            <canvas id="weeklyChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+                        <h3 class="font-medium text-lg mb-4">Workout Type Distribution</h3>
+                        <div class="chart-container">
+                            <canvas id="typeChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200 mb-6">
+                    <h3 class="font-medium text-lg mb-4">Recent Progress</h3>
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full divide-y divide-gray-200">
+                            <thead class="bg-gray-50">
+                                <tr>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Workout</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Exercises</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Completion</th>
+                                </tr>
+                            </thead>
+                            <tbody class="bg-white divide-y divide-gray-200" id="progress-history">
+                                <!-- Progress history will be loaded here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                
+                <div class="flex justify-end">
+                    <button id="export-data" class="bg-gray-200 hover:bg-gray-300 text-gray-800 font-medium py-2 px-4 rounded-lg transition-colors">
+                        <i class="fas fa-download mr-2"></i>Export Data
+                    </button>
+                </div>
+            </div>
+
+            <!-- Equipment Tab -->
+            <div id="equipment" class="tab-content p-6 fade-in">
+                <h2 class="text-2xl font-semibold mb-6">Equipment Details</h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                    <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+                        <h3 class="font-medium text-lg mb-4 text-center">Dumbbells</h3>
+                        <table class="min-w-full">
+                            <thead>
+                                <tr class="border-b">
+                                    <th class="text-left py-2 px-1">Size</th>
+                                    <th class="text-right py-2 px-1">Weight</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="border-b">
+                                    <td class="py-2 px-1">1</td>
+                                    <td class="text-right py-2 px-1">1.50 KG</td>
+                                </tr>
+                                <tr class="border-b">
+                                    <td class="py-2 px-1">2</td>
+                                    <td class="text-right py-2 px-1">2.50 KG</td>
+                                </tr>
+                                <tr class="border-b">
+                                    <td class="py-2 px-1">3</td>
+                                    <td class="text-right py-2 px-1">3.50 KG</td>
+                                </tr>
+                                <tr class="border-b">
+                                    <td class="py-2 px-1">4</td>
+                                    <td class="text-right py-2 px-1">4.50 KG</td>
+                                </tr>
+                                <tr class="border-b">
+                                    <td class="py-2 px-1">Bar + Grips</td>
+                                    <td class="text-right py-2 px-1">3 KG</td>
+                                </tr>
+                                <tr class="font-semibold bg-gray-50">
+                                    <td class="py-2 px-1">Total</td>
+                                    <td class="text-right py-2 px-1">15 KG</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+                        <h3 class="font-medium text-lg mb-4 text-center">Resistance Bands</h3>
+                        <table class="min-w-full">
+                            <thead>
+                                <tr class="border-b">
+                                    <th class="text-left py-2 px-1">Color</th>
+                                    <th class="text-right py-2 px-1">Resistance</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="border-b">
+                                    <td class="py-2 px-1">Yellow</td>
+                                    <td class="text-right py-2 px-1">4.6 KG</td>
+                                </tr>
+                                <tr class="border-b">
+                                    <td class="py-2 px-1">Red</td>
+                                    <td class="text-right py-2 px-1">9.0 KG</td>
+                                </tr>
+                                <tr class="border-b">
+                                    <td class="py-2 px-1">Blue</td>
+                                    <td class="text-right py-2 px-1">13.5 KG</td>
+                                </tr>
+                                <tr class="border-b">
+                                    <td class="py-2 px-1">Green</td>
+                                    <td class="text-right py-2 px-1">18.2 KG</td>
+                                </tr>
+                                <tr class="border-b">
+                                    <td class="py-2 px-1">Black</td>
+                                    <td class="text-right py-2 px-1">22.8 KG</td>
+                                </tr>
+                                <tr class="font-semibold bg-gray-50">
+                                    <td class="py-2 px-1">Total</td>
+                                    <td class="text-right py-2 px-1">68.1 KG</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+                        <h3 class="font-medium text-lg mb-4 text-center">Vest</h3>
+                        <table class="min-w-full">
+                            <thead>
+                                <tr class="border-b">
+                                    <th class="text-left py-2 px-1">Amount</th>
+                                    <th class="text-right py-2 px-1">Weight</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="border-b">
+                                    <td class="py-2 px-1">1</td>
+                                    <td class="text-right py-2 px-1">0.66 KG</td>
+                                </tr>
+                                <tr class="border-b">
+                                    <td class="py-2 px-1">5</td>
+                                    <td class="text-right py-2 px-1">3.3 KG</td>
+                                </tr>
+                                <tr class="border-b">
+                                    <td class="py-2 px-1">10</td>
+                                    <td class="text-right py-2 px-1">6.6 KG</td>
+                                </tr>
+                                <tr class="border-b">
+                                    <td class="py-2 px-1">15</td>
+                                    <td class="text-right py-2 px-1">9.9 KG</td>
+                                </tr>
+                                <tr class="border-b">
+                                    <td class="py-2 px-1">20</td>
+                                    <td class="text-right py-2 px-1">13.2 KG</td>
+                                </tr>
+                                <tr class="font-semibold bg-gray-50">
+                                    <td class="py-2 px-1">Total</td>
+                                    <td class="text-right py-2 px-1">20 KG</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                
+                <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+                    <h3 class="font-medium text-lg mb-4">Combination Calculator</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Dumbbell Combination</label>
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <button class="dumbbell-btn px-3 py-1 bg-gray-200 hover:bg-gray-300 rounded" data-size="1">1</button>
+                                <button class="dumbbell-btn px-3 py-1 bg-gray-200 hover:bg-gray-300 rounded" data-size="2">2</button>
+                                <button class="dumbbell-btn px-3 py-1 bg-gray-200 hover:bg-gray-300 rounded" data-size="3">3</button>
+                                <button class="dumbbell-btn px-3 py-1 bg-gray-200 hover:bg-gray-300 rounded" data-size="4">4</button>
+                                <button class="px-3 py-1 bg-gray-200 hover:bg-gray-300 rounded" id="clear-dumbbell">Clear</button>
+                            </div>
+                            <div class="p-3 bg-gray-50 rounded">
+                                <p class="text-sm">Selected: <span id="dumbbell-selection">None</span></p>
+                                <p class="font-medium">Total Weight: <span id="dumbbell-total">0 KG</span></p>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Band Combination</label>
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <button class="band-btn px-3 py-1 bg-yellow-200 hover:bg-yellow-300 rounded" data-color="yellow">Yellow</button>
+                                <button class="band-btn px-3 py-1 bg-red-200 hover:bg-red-300 rounded" data-color="red">Red</button>
+                                <button class="band-btn px-3 py-1 bg-blue-200 hover:bg-blue-300 rounded" data-color="blue">Blue</button>
+                                <button class="band-btn px-3 py-1 bg-green-200 hover:bg-green-300 rounded" data-color="green">Green</button>
+                                <button class="band-btn px-3 py-1 bg-gray-800 hover:bg-gray-700 text-white rounded" data-color="black">Black</button>
+                                <button class="px-3 py-1 bg-gray-200 hover:bg-gray-300 rounded" id="clear-band">Clear</button>
+                            </div>
+                            <div class="p-3 bg-gray-50 rounded">
+                                <p class="text-sm">Selected: <span id="band-selection">None</span></p>
+                                <p class="font-medium">Total Resistance: <span id="band-total">0 KG</span></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // Initialize workout data
+        const workoutData = {
+            monday: {
+                title: "Monday - Push",
+                exercises: [
+                    { name: "Dumbbell Floor Press", sets: "3", reps: "10", weight: "1+2+3+4 = 15 KG", completed: false },
+                    { name: "Incline Push-up", sets: "3", reps: "7", weight: "", completed: false },
+                    { name: "Seated Dumbbell Shoulder Press", sets: "3", reps: "7", weight: "1+2+3+4 = 15 KG", completed: false },
+                    { name: "Lateral Raises with Elastics", sets: "3", reps: "8", weight: "Green + Red = 27,2 KG", completed: false },
+                    { name: "Overhead Triceps Extension", sets: "3", reps: "10", weight: "Green + Red = 27,2 KG", completed: false },
+                    { name: "Triceps Kickbacks with Elastics", sets: "3", reps: "8", weight: "Green + Red = 27,2 KG", completed: false }
+                ]
+            },
+            tuesday: {
+                title: "Tuesday - Pull",
+                exercises: [
+                    { name: "Bent-over Dumbbell Rows", sets: "3", reps: "8", weight: "1+2+3+4 = 15 KG", completed: false },
+                    { name: "Dumbbell Pullovers", sets: "3", reps: "7", weight: "1+2+3+4 = 15 KG", completed: false },
+                    { name: "Face Pulls with Elastics", sets: "3", reps: "7", weight: "RED + Blue = 22,5 KG", completed: false },
+                    { name: "Bicep Curls", sets: "3", reps: "10", weight: "4+3 = 11 KG", completed: false },
+                    { name: "Hammer Curls with Elastics", sets: "3", reps: "10", weight: "Blue = 13,5 KG", completed: false },
+                    { name: "Shrugs with Dumbbells", sets: "3", reps: "10", weight: "1+2+3+4 = 15 KG", completed: false }
+                ]
+            },
+            wednesday: {
+                title: "Wednesday - Legs",
+                exercises: [
+                    { name: "Goblet Squats with Dumbbell", sets: "3", reps: "10", weight: "1+2+3+4 = 15 KG", completed: false },
+                    { name: "Bulgarian Split Squats", sets: "3", reps: "8", weight: "a leg", completed: false },
+                    { name: "Romanian Deadlifts with Dumbbells", sets: "3", reps: "10", weight: "1+2+3+4 = 15 KG", completed: false },
+                    { name: "Glute Bridges", sets: "3", reps: "12", weight: "1+2+3+4 = 15 KG", completed: false },
+                    { name: "Standing Calf Raises", sets: "3", reps: "15", weight: "30 = 20 KG", completed: false },
+                    { name: "Plank workout", sets: "3", reps: "60 Seconds", weight: "", completed: false }
+                ]
+            },
+            thursday: {
+                title: "Thursday - Push",
+                exercises: [
+                    { name: "Dumbbell Floor Press", sets: "3", reps: "10", weight: "1+2+3+4 = 15 KG", completed: false },
+                    { name: "Incline Push-up", sets: "3", reps: "7", weight: "", completed: false },
+                    { name: "Seated Dumbbell Shoulder Press", sets: "3", reps: "7", weight: "1+2+3+4 = 15 KG", completed: false },
+                    { name: "Lateral Raises with Elastics", sets: "3", reps: "8", weight: "Green + Red = 27,2 KG", completed: false },
+                    { name: "Overhead Triceps Extension", sets: "3", reps: "10", weight: "Green + Red = 27,2 KG", completed: false },
+                    { name: "Triceps Kickbacks with Elastics", sets: "3", reps: "8", weight: "Green + Red = 27,2 KG", completed: false }
+                ]
+            },
+            friday: {
+                title: "Friday - Pull",
+                exercises: [
+                    { name: "Bent-over Dumbbell Rows", sets: "3", reps: "8", weight: "1+2+3+4 = 15 KG", completed: false },
+                    { name: "Dumbbell Pullovers", sets: "3", reps: "7", weight: "1+2+3+4 = 15 KG", completed: false },
+                    { name: "Face Pulls with Elastics", sets: "3", reps: "7", weight: "RED + Blue = 22,5 KG", completed: false },
+                    { name: "Bicep Curls", sets: "3", reps: "10", weight: "4+3 = 11 KG", completed: false },
+                    { name: "Hammer Curls with Elastics", sets: "3", reps: "10", weight: "Blue = 13,5 KG", completed: false },
+                    { name: "Shrugs with Dumbbells", sets: "3", reps: "10", weight: "1+2+3+4 = 15 KG", completed: false }
+                ]
+            },
+            saturday: {
+                title: "Saturday - Legs",
+                exercises: [
+                    { name: "Goblet Squats with Dumbbell", sets: "3", reps: "10", weight: "1+2+3+4 = 15 KG", completed: false },
+                    { name: "Bulgarian Split Squats", sets: "3", reps: "8", weight: "a leg", completed: false },
+                    { name: "Romanian Deadlifts with Dumbbells", sets: "3", reps: "10", weight: "1+2+3+4 = 15 KG", completed: false },
+                    { name: "Glute Bridges", sets: "3", reps: "12", weight: "1+2+3+4 = 15 KG", completed: false },
+                    { name: "Standing Calf Raises", sets: "3", reps: "15", weight: "30 = 20 KG", completed: false },
+                    { name: "Plank workout", sets: "3", reps: "60 Seconds", weight: "", completed: false }
+                ]
+            },
+            sunday: {
+                title: "Sunday - Rest",
+                exercises: []
+            }
+        };
+
+        // Equipment weights
+        const equipmentWeights = {
+            dumbbells: {
+                '1': 1.5,
+                '2': 2.5,
+                '3': 3.5,
+                '4': 4.5,
+                'bar': 3
+            },
+            bands: {
+                'yellow': 4.6,
+                'red': 9.0,
+                'blue': 13.5,
+                'green': 18.2,
+                'black': 22.8
+            }
+        };
+
+        // Initialize progress data
+        let progressData = {
+            history: [],
+            lastUpdated: null
+        };
+
+        // Load data from localStorage
+        function loadData() {
+            const savedWorkouts = localStorage.getItem('workoutData');
+            const savedProgress = localStorage.getItem('progressData');
+            
+            if (savedWorkouts) {
+                Object.assign(workoutData, JSON.parse(savedWorkouts));
+            }
+            
+            if (savedProgress) {
+                progressData = JSON.parse(savedProgress);
+            }
+        }
+
+        // Save data to localStorage
+        function saveData() {
+            localStorage.setItem('workoutData', JSON.stringify(workoutData));
+            localStorage.setItem('progressData', JSON.stringify(progressData));
+        }
+
+        // Get current day of week
+        function getCurrentDay() {
+            const days = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
+            const today = new Date().getDay();
+            return days[today];
+        }
+
+        // Render today's workout
+        function renderTodayWorkout() {
+            const today = getCurrentDay();
+            const todayWorkout = workoutData[today];
+            const container = document.getElementById('today-exercises');
+            
+            document.getElementById('today-title').textContent = todayWorkout.title;
+            container.innerHTML = '';
+            
+            if (todayWorkout.exercises.length === 0) {
+                container.innerHTML = '<p class="text-gray-500">Rest day! No exercises scheduled.</p>';
+                document.getElementById('today-progress').style.width = '100%';
+                document.getElementById('today-stats').textContent = '0/0 exercises';
+                return;
+            }
+            
+            let completedCount = 0;
+            
+            todayWorkout.exercises.forEach((exercise, index) => {
+                const exerciseEl = document.createElement('div');
+                exerciseEl.className = 'exercise-item bg-gray-50 p-4 rounded-lg border border-gray-200 flex items-start';
+                exerciseEl.innerHTML = `
+                    <div class="flex items-center mr-4">
+                        <input type="checkbox" id="ex-${index}" class="exercise-checkbox h-5 w-5 text-blue-600 rounded" ${exercise.completed ? 'checked' : ''}>
+                    </div>
+                    <div class="flex-1">
+                        <div class="flex justify-between items-start">
+                            <h4 class="font-medium exercise-name" contenteditable="true">${exercise.name}</h4>
+                            <button class="edit-btn text-gray-400 hover:text-blue-600 ml-2">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                        </div>
+                        <div class="mt-2 grid grid-cols-2 gap-2 text-sm">
+                            <div>
+                                <span class="text-gray-500">Sets x Reps:</span>
+                                <span class="exercise-sets" contenteditable="true">${exercise.sets}</span> x 
+                                <span class="exercise-reps" contenteditable="true">${exercise.reps}</span>
+                            </div>
+                            <div>
+                                <span class="text-gray-500">Weight:</span>
+                                <span class="exercise-weight" contenteditable="true">${exercise.weight}</span>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                container.appendChild(exerciseEl);
+                
+                if (exercise.completed) completedCount++;
+                
+                // Add event listeners for the checkbox
+                const checkbox = exerciseEl.querySelector('.exercise-checkbox');
+                checkbox.addEventListener('change', function() {
+                    todayWorkout.exercises[index].completed = this.checked;
+                    updateTodayProgress();
+                });
+                
+                // Add event listeners for editable fields
+                const nameField = exerciseEl.querySelector('.exercise-name');
+                const setsField = exerciseEl.querySelector('.exercise-sets');
+                const repsField = exerciseEl.querySelector('.exercise-reps');
+                const weightField = exerciseEl.querySelector('.exercise-weight');
+                
+                nameField.addEventListener('blur', function() {
+                    todayWorkout.exercises[index].name = this.textContent;
+                });
+                
+                setsField.addEventListener('blur', function() {
+                    todayWorkout.exercises[index].sets = this.textContent;
+                });
+                
+                repsField.addEventListener('blur', function() {
+                    todayWorkout.exercises[index].reps = this.textContent;
+                });
+                
+                weightField.addEventListener('blur', function() {
+                    todayWorkout.exercises[index].weight = this.textContent;
+                });
+            });
+            
+            updateTodayProgress();
+        }
+
+        // Update today's progress bar and stats
+        function updateTodayProgress() {
+            const today = getCurrentDay();
+            const todayWorkout = workoutData[today];
+            
+            if (todayWorkout.exercises.length === 0) {
+                document.getElementById('today-progress').style.width = '100%';
+                document.getElementById('today-stats').textContent = '0/0 exercises';
+                return;
+            }
+            
+            const completedCount = todayWorkout.exercises.filter(ex => ex.completed).length;
+            const totalCount = todayWorkout.exercises.length;
+            const percentage = Math.round((completedCount / totalCount) * 100);
+            
+            document.getElementById('today-progress').style.width = `${percentage}%`;
+            document.getElementById('today-stats').textContent = `${completedCount}/${totalCount} exercises`;
+        }
+
+        // Render weekly workout plan
+        function renderWeeklyWorkout() {
+            Object.keys(workoutData).forEach(day => {
+                const dayWorkout = workoutData[day];
+                const container = document.getElementById(`${day}-exercises`);
+                container.innerHTML = '';
+                
+                if (dayWorkout.exercises.length === 0) {
+                    container.innerHTML = '<p class="text-gray-500 text-sm">Rest day! No exercises scheduled.</p>';
+                    return;
+                }
+                
+                dayWorkout.exercises.forEach((exercise, index) => {
+                    const exerciseEl = document.createElement('div');
+                    exerciseEl.className = 'mb-3 pb-3 border-b border-gray-100 last:border-0 last:mb-0 last:pb-0';
+                    exerciseEl.innerHTML = `
+                        <div class="flex justify-between items-start">
+                            <h4 class="text-sm font-medium">${exercise.name}</h4>
+                            <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">${exercise.sets}x${exercise.reps}</span>
+                        </div>
+                        <div class="text-xs text-gray-500 mt-1">${exercise.weight || 'Bodyweight'}</div>
+                    `;
+                    container.appendChild(exerciseEl);
+                });
+            });
+        }
+
+        // Render analytics
+        function renderAnalytics() {
+            // Generate some sample data for the charts
+            const days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+            const completionData = days.map(day => Math.floor(Math.random() * 100));
+            
+            // Weekly completion chart
+            const weeklyCtx = document.getElementById('weeklyChart').getContext('2d');
+            new Chart(weeklyCtx, {
+                type: 'bar',
+                data: {
+                    labels: days,
+                    datasets: [{
+                        label: 'Completion %',
+                        data: completionData,
+                        backgroundColor: '#3b82f6',
+                        borderRadius: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 100
+                        }
+                    }
+                }
+            });
+            
+            // Workout type distribution chart
+            const typeCtx = document.getElementById('typeChart').getContext('2d');
+            new Chart(typeCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Push', 'Pull', 'Legs', 'Rest'],
+                    datasets: [{
+                        data: [35, 30, 25, 10],
+                        backgroundColor: ['#3b82f6', '#10b981', '#8b5cf6', '#9ca3af'],
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    cutout: '70%',
+                    plugins: {
+                        legend: {
+                            position: 'right'
+                        }
+                    }
+                }
+            });
+            
+            // Render progress history
+            const historyContainer = document.getElementById('progress-history');
+            historyContainer.innerHTML = '';
+            
+            if (progressData.history.length === 0) {
+                historyContainer.innerHTML = '<tr><td colspan="4" class="px-6 py-4 text-center text-gray-500">No workout history yet</td></tr>';
+                return;
+            }
+            
+            progressData.history.slice(0, 10).forEach(entry => {
+                const row = document.createElement('tr');
+                row.className = 'hover:bg-gray-50';
+                row.innerHTML = `
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${entry.date}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">${entry.workout}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${entry.exercisesCompleted}/${entry.exercisesTotal}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                        <div class="flex items-center">
+                            <div class="w-16 mr-2">
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: ${entry.percentage}%"></div>
+                                </div>
+                            </div>
+                            <span>${entry.percentage}%</span>
+                        </div>
+                    </td>
+                `;
+                historyContainer.appendChild(row);
+            });
+        }
+
+        // Save today's progress
+        function saveTodayProgress() {
+            const today = getCurrentDay();
+            const todayWorkout = workoutData[today];
+            
+            if (todayWorkout.exercises.length === 0) return;
+            
+            const completedCount = todayWorkout.exercises.filter(ex => ex.completed).length;
+            const totalCount = todayWorkout.exercises.length;
+            const percentage = Math.round((completedCount / totalCount) * 100);
+            
+            // Add to progress history
+            const todayDate = new Date().toLocaleDateString();
+            progressData.history.unshift({
+                date: todayDate,
+                workout: todayWorkout.title,
+                exercisesCompleted: completedCount,
+                exercisesTotal: totalCount,
+                percentage: percentage
+            });
+            
+            progressData.lastUpdated = new Date().toISOString();
+            
+            // Save data
+            saveData();
+            
+            // Show success message
+            alert('Progress saved successfully!');
+            
+            // Update analytics
+            renderAnalytics();
+        }
+
+        // Export data as JSON
+        function exportData() {
+            const data = {
+                workoutData: workoutData,
+                progressData: progressData
+            };
+            
+            const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `workout-data-${new Date().toISOString().slice(0, 10)}.json`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+
+        // Equipment calculator functions
+        function setupEquipmentCalculator() {
+            let selectedDumbbells = [];
+            let selectedBands = [];
+            
+            // Dumbbell buttons
+            document.querySelectorAll('.dumbbell-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const size = this.dataset.size;
+                    
+                    if (selectedDumbbells.includes(size)) {
+                        selectedDumbbells = selectedDumbbells.filter(s => s !== size);
+                    } else {
+                        selectedDumbbells.push(size);
+                    }
+                    
+                    updateDumbbellDisplay();
+                });
+            });
+            
+            // Clear dumbbells
+            document.getElementById('clear-dumbbell').addEventListener('click', function() {
+                selectedDumbbells = [];
+                updateDumbbellDisplay();
+            });
+            
+            // Band buttons
+            document.querySelectorAll('.band-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const color = this.dataset.color;
+                    
+                    if (selectedBands.includes(color)) {
+                        selectedBands = selectedBands.filter(c => c !== color);
+                    } else {
+                        selectedBands.push(color);
+                    }
+                    
+                    updateBandDisplay();
+                });
+            });
+            
+            // Clear bands
+            document.getElementById('clear-band').addEventListener('click', function() {
+                selectedBands = [];
+                updateBandDisplay();
+            });
+            
+            function updateDumbbellDisplay() {
+                const selectionEl = document.getElementById('dumbbell-selection');
+                const totalEl = document.getElementById('dumbbell-total');
+                
+                if (selectedDumbbells.length === 0) {
+                    selectionEl.textContent = 'None';
+                    totalEl.textContent = '0 KG';
+                    return;
+                }
+                
+                selectionEl.textContent = selectedDumbbells.join('+');
+                
+                let total = 0;
+                selectedDumbbells.forEach(size => {
+                    total += equipmentWeights.dumbbells[size];
+                });
+                
+                // Add bar weight if any dumbbell is selected
+                total += equipmentWeights.dumbbells['bar'];
+                
+                totalEl.textContent = `${total} KG`;
+            }
+            
+            function updateBandDisplay() {
+                const selectionEl = document.getElementById('band-selection');
+                const totalEl = document.getElementById('band-total');
+                
+                if (selectedBands.length === 0) {
+                    selectionEl.textContent = 'None';
+                    totalEl.textContent = '0 KG';
+                    return;
+                }
+                
+                // Capitalize first letter of each color
+                const formattedColors = selectedBands.map(color => 
+                    color.charAt(0).toUpperCase() + color.slice(1).toLowerCase()
+                );
+                
+                selectionEl.textContent = formattedColors.join(' + ');
+                
+                let total = 0;
+                selectedBands.forEach(color => {
+                    total += equipmentWeights.bands[color];
+                });
+                
+                totalEl.textContent = `${total} KG`;
+            }
+        }
+
+        // Tab switching
+        function setupTabs() {
+            const tabBtns = document.querySelectorAll('.tab-btn');
+            const tabContents = document.querySelectorAll('.tab-content');
+            
+            tabBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const tabId = this.dataset.tab;
+                    
+                    // Hide all tab contents
+                    tabContents.forEach(content => {
+                        content.classList.remove('active');
+                    });
+                    
+                    // Show selected tab content
+                    document.getElementById(tabId).classList.add('active');
+                    
+                    // Update active tab button
+                    tabBtns.forEach(btn => {
+                        btn.classList.remove('border-blue-600', 'text-blue-600');
+                        btn.classList.add('border-transparent');
+                    });
+                    
+                    this.classList.remove('border-transparent');
+                    this.classList.add('border-blue-600', 'text-blue-600');
+                    
+                    // If switching to analytics tab, update the charts
+                    if (tabId === 'analytics') {
+                        renderAnalytics();
+                    }
+                });
+            });
+            
+            // Set first tab as active by default
+            tabBtns[0].classList.add('border-blue-600', 'text-blue-600');
+        }
+
+        // Initialize the app
+        function init() {
+            loadData();
+            renderTodayWorkout();
+            renderWeeklyWorkout();
+            renderAnalytics();
+            setupTabs();
+            setupEquipmentCalculator();
+            
+            // Save button event listener
+            document.getElementById('save-today').addEventListener('click', saveTodayProgress);
+            
+            // Export button event listener
+            document.getElementById('export-data').addEventListener('click', exportData);
+        }
+
+        // Start the app when DOM is loaded
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>
