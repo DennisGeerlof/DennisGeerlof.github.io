@@ -50,5 +50,9 @@ i {
     body {
         height: unset !important;
     }
+
+    .title {
+        font-size: 15px;
+    }
     
 }
