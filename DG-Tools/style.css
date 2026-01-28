@@ -20,6 +20,7 @@ a {
 #container {
     flex-direction: row;
     flex-wrap: wrap;
+    max-width: 60%;
 }
 
 .row {
@@ -49,6 +50,10 @@ i {
 
     body {
         height: unset !important;
+    }
+
+    #container {
+        max-width: unset;
     }
 
     .title {
