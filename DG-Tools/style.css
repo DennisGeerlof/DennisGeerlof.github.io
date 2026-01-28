@@ -9,7 +9,7 @@ body {
     background-color: black;
     color: white;
     text-align: center;
-    height: 97vh;
+    min-height: 97vh;
 }
 
 a {
