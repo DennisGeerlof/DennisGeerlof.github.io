@@ -1,39 +1,128 @@
 <!DOCTYPE html>
 <html lang="nl">
 <head>
-        <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Q02KBYRK18"></script>
-    <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-
-    gtag('config', 'G-Q02KBYRK18');
-    </script>
-
     <meta charset="UTF-8">
-    <meta property="og:type" content="website" />
-    <meta property="og:title" content="DG" />
-    <meta property="og:image" content="https://dennisgeerlof.github.io/images/Meta.png" />
-    <meta property="og:url" content="https://dennisgeerlof.github.io/index.html" />
-    <meta property="og:description" content="This is Dennis Geerlof" />
-    <meta name="keywords" content="Dennis, Geerlof, Software Developer" />
-    <meta name="author" content="Dennis Geerlof" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dennis Geerlof | Software Developer</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;900&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" type="text/css" href="style.css">
-    <title>DG</title>
-    <link rel="shortcut icon" href="images/favicon.ico">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <div>
-        <h1 id="titel2">Dennis Geerlof</h1>
-        <a href="general.html" class="navigation">General</a>
-        <a href="about.html" class="nav navigation">About</a>
-        <h1 id="titel">Dennis Geerlof</h1>
-        <a href="experience.html" class="nav navigation">Experience</a>
-        <a href="contact.html" class="navigation">Contact</a>
-    </div>
-    <img src="images/Logo_White.png" alt="Logo_White" id="logo" style="max-width: 100%;">
+
+    <nav>
+        <div class="logo">
+            <a href="#home"><img src="images/logo.png" alt="Dennis Geerlof"></a>
+        </div>
+        <div class="nav-links">
+            <a href="#home">Home</a>
+            <a href="#over-mij">Over Mij</a>
+            <a href="#carriere">Carrière</a>
+            <a href="#contact">Contact</a>
+        </div>
+    </nav>
+
+    <header id="home" class="slider-wrapper">
+        <button id="btn-links" class="nav-btn">&lt;</button>
+        <button id="btn-rechts" class="nav-btn">&gt;</button>
+
+        <div class="slider" id="mijnSlider">
+            <div id="slider-item-1">
+                <h1>Dennis Geerlof</h1>
+                <p>Jouw partner in innovatieve IT-oplossingen.</p>
+            </div>
+            <div id="slider-item-2">
+                <h1>IT Expert</h1>
+                <p>Gespecialiseerd in werkplekbeheer, troubleshooting en Microsoft 365 configuraties.</p>
+            </div>
+            <div id="slider-item-3">
+                <h1>Software Developer</h1>
+                <p>Gedreven door architectuur, gebouwd voor de toekomst.</p>
+            </div>
+        </div>
+    </header>
+
+    <section id="over-mij" class="section-container reveal">
+        <h2 class="section-title">Over Mij</h2>
+        <div class="about-grid">
+            <div class="about-text">
+                <p>Met een scherp oog voor detail en een passie voor robuuste architectuur, bouw ik software die niet alleen werkt, maar ook schaalt. Ik ben Dennis Geerlof, een gediplomeerd Software Developer.</p>
+                <p>Mijn aanpak is direct en transparant, net als de code die ik schrijf. Geen onnodige complexiteit, maar gefocust op resultaat en veiligheid.</p>
+            </div>
+            <div class="about-image">
+                <img src="images/dennis.jpg" alt="Foto van Dennis" style="width: 100%; height: 100%; object-fit: cover;">
+            </div>
+        </div>
+    </section>
+
+    <section id="carriere" class="section-container reveal">
+        <h2 class="section-title">Carrière</h2>
+        
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-date">Oktober 2025 - Heden</div>
+                <div class="timeline-content">
+                    <h3>Junior Servicemedewerker | KroonCo</h3>
+                    <p>Verantwoordelijk voor eerstelijns support, werkplekbeheer (onboarding) en troubleshooting van complexe IT-problemen binnen Microsoft 365 omgevingen.</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-date">Juni 2024 - Juni 2025</div>
+                <div class="timeline-content">
+                    <h3>Office Manager / Online marketeer | New Media Online</h3>
+                    <p>Ontwikkelen van SEO-gerichte websites en webshops, en fungeren als centraal aanspreekpunt voor klanten.</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-date">Februari 2024 - Juni 2024</div>
+                <div class="timeline-content">
+                    <h3>Software Developer (Stage) | New Media Online</h3>
+                    <p>Ontwikkeling van nieuwe functionaliteiten voor webapplicaties en ondersteuning bij testen en debuggen.</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-date">September 2022 - Maart 2023</div>
+                <div class="timeline-content">
+                    <h3>Webdesigner (Stage) | Edit4U</h3>
+                    <p>Ontwerpen van gebruiksvriendelijke, responsive websites met het Joomla CMS en eigen extensies.</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-date">September 2021 - Juni 2024</div>
+                <div class="timeline-content">
+                    <h3>Opleiding Software Developer MBO 4 | mboRijnland</h3>
+                    <p>Succesvol afgerond met diepgaande kennis van HTML, CSS, JavaScript, PHP en SQL.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="section-container reveal">
+        <h2 class="section-title">Contact</h2>
+        <div class="contact-wrapper">
+            <div class="contact-info">
+                <p><strong>E-mail:</strong> <a href="mailto:d.geerlof.13@gmail.com">d.geerlof.13@gmail.com</a></p>
+                <p><strong>Telefoon:</strong> <a href="tel:0627281743">06-27281743</a></p>
+                <p><strong>Locatie:</strong> Boskoop</p>
+                <p><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/dennis-geerlof-527ba4150/" target="_blank">Bekijk Profiel</a></p>
+            </div>
+            <form id="contact-form" action="https://formspree.io/f/xdawreeb" method="POST" class="contact-form">
+                <input type="text" name="naam" placeholder="Naam" required>
+                <input type="email" name="email" placeholder="E-mailadres" required>
+                <textarea name="bericht" placeholder="Jouw bericht" rows="5" required></textarea>
+                <button type="submit" id="submit-btn" class="submit-btn">Verstuur Bericht</button>
+                <p id="form-status" style="margin-top: 10px; font-weight: 600;"></p>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 DENNIS GEERLOF. ALL RIGHTS RESERVED.</p>
+    </footer>
+
+    <script src="js/script.js"></script>
 </body>
 </html>
