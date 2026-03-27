@@ -147,10 +147,6 @@ nav {
 #btn-links { left: 30px; }
 #btn-rechts { right: 30px; }
 
-#slider-item-1, #slider-item-2, #slider-item-3 {
-    background-image: url("../images/background.jpg");
-}
-
 /* Secties */
 .section-container {
     max-width: 1000px;
