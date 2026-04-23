@@ -33,7 +33,7 @@ function openTab(evt, tabName) {
     evt.currentTarget.classList.add("active");
 }
 
-// NIEUW: Logica om het formulier te verzenden zonder doorsturen
+// Logica om het formulier te verzenden zonder doorsturen
 const form = document.querySelector("form");
 
 form.addEventListener("submit", async function(event) {
@@ -60,8 +60,8 @@ form.addEventListener("submit", async function(event) {
 
         // 4. Controleer of het is gelukt
         if (response.ok) {
-            // Vervang het hele formulier door een succesmelding
-            form.innerHTML = "<h3 style='text-align: center; color: #4CAF50; padding: 20px;'>Bedankt! De RSVP is succesvol verzonden.</h3>";
+            // Vervang het hele formulier door een succesmelding (kleur aangepast naar lila thema)
+            form.innerHTML = "<h3 style='text-align: center; color: #A390CA; padding: 30px;'>Bedankt! De RSVP is succesvol verzonden.</h3>";
         } else {
             // Als er iets misgaat bij Formspree
             alert("Oeps! Er ging iets mis. Probeer het later nog eens.");

@@ -10,6 +10,7 @@
     <div class="container">
         <header>
             <nav>
+                <a href="#kleurpalet">Kleuren</a>
                 <a href="#route">Route</a>
                 <a href="#rsvp">RSVP</a>
             </nav>
@@ -18,17 +19,14 @@
         <main>
             <section class="hero">
                 <h1>Thomas & Roos</h1>
-                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+                <p>Wij gaan trouwen en we zouden het fantastisch vinden als jij deze speciale dag met ons komt vieren!</p>
                 <br>
                 <p class="deadline">Laat voor dd/mm/jjjj weten of je komt!</p>
-                <br>
-                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
             </section>
 
             <section id="rsvp">
                 <h2>RSVP</h2>
                 <form action="https://formspree.io/f/xdayzqok" method="POST">
-                    
                     <div class="form-group">
                         <label for="naam">Naam:</label>
                         <input type="text" id="naam" name="Naam" required>
@@ -63,31 +61,47 @@
 
             <section id="kleurpalet">
                 <h2>Kleurpalet</h2>
-                <p style="text-align: center;">We zouden het leuk vinden als je kleding details bevat in deze kleuren:</p>
-                <div class="palette">
-                    <div class="color-box" style="background-color: #E6E6FA;">Lila</div>
-                    <div class="color-box" style="background-color: #98FF98;">Mint</div>
-                    <div class="color-box" style="background-color: #FFB6C1;">Roze</div>
+                <p style="text-align: center; margin-bottom: 20px;">We zouden het leuk vinden als je kleding details bevat in deze kleuren:</p>
+                
+                <div class="image-container">
+                    <img src="Files/Kleurenkaart.jpeg" alt="Kleurenkaart Thomas & Roos" class="responsive-img">
                 </div>
             </section>
 
             <section id="route">
                 <h2>Routebeschrijving</h2>
+                <p style="text-align: center; margin-bottom: 20px;">De locatie is <strong>Anafora</strong> (Uilenboslaan 1, 3451 GB Vleuten).</p>
+
                 <div class="tabs">
                     <button class="tab-btn active" onclick="openTab(event, 'auto')">Auto</button>
                     <button class="tab-btn" onclick="openTab(event, 'ov')">OV</button>
                 </div>
 
                 <div id="auto" class="tab-content active">
-                    <p>Hier komt de beschrijving voor de auto (parkeren, etc.).</p>
+                    <h3 style="margin-bottom: 10px;">Parkeren (P1)</h3>
+                    <p>Het Máximapark is een voetgangersgebied. Je kunt gratis parkeren op het terrein tegenover het park (ca. 5 min. lopen).</p>
+                    <p style="margin: 15px 0;"><strong>Adres:</strong> Utrechtseweg 4A, 3451 GG Utrecht</p>
+                    
+                    <a href="https://maps.app.goo.gl/2HTgjA62T7TTau3v7" target="_blank" class="btn maps-btn">Navigeer naar Parkeerplaats</a>
+                    
+                    <div class="accordion-group">
+                        <details>
+                            <summary>Wat te doen als P1 vol staat?</summary>
+                            <p>Volg de borden naar P2 (Burgemeester Middelweerdplaats 1, 3454 HG Utrecht).</p>
+                        </details>
+                    </div>
                 </div>
 
                 <div id="ov" class="tab-content">
-                    <p>Hier komt de beschrijving voor het openbaar vervoer (dichtstbijzijnde station/halte).</p>
+                    <p>Buslijnen 4, 28 en 127 stoppen dicht bij het park. Treinstations Terwijde en Vleuten liggen op 15 minuten lopen.</p>
                 </div>
 
-                <div class="map-placeholder">
-                    <p>[Hier komt het maps kaartje / de foto]</p>
+                <div class="download-section">
+                    <p>Sla de informatie op voor onderweg:</p>
+                    <div class="button-group">
+                        <a href="Files/Routebeschrijving-Anafora.pdf" download class="btn download-btn">Download Routebeschrijving</a>
+                        <a href="Files/Auto-parkeren-en-OV.pdf" download class="btn download-btn">Download Parkeren & OV</a>
+                    </div>
                 </div>
             </section>
         </main>
@@ -100,4 +114,4 @@
 
     <script src="script.js"></script>
 </body>
-</html> 
+</html>
