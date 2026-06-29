@@ -1,6 +1,14 @@
-html {
+/* 1. RESET BOX MODEL AND MARGINS globally to prevent overflow */
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
     height: 100vh;
 }
+
 body {
     position: relative;
     color: white;
@@ -9,7 +17,7 @@ body {
 }
 
 h1 {
-    margin: 0 0 0 0;
+    margin: 0;
 }
 
 a {
@@ -19,7 +27,7 @@ a {
 button {
     all: unset;
     cursor: pointer;
-  }
+}
 
 input {
     all: unset;
@@ -27,16 +35,17 @@ input {
 
 input::placeholder {
     color: white;
-  }
+}
 
-  .search-button:hover {
+.search-button:hover {
     background-color: white;
     color: black;
     border-radius: 100%;
 }
 
+/* 2. MATCH THE MAIN HEIGHT CONTAINER */
 #flex-container {
-    height: 98vh;
+    height: 100vh; /* Changed from 98vh to cleanly fill the screen */
     display: flex;
     flex-direction: column;
 }
@@ -49,7 +58,6 @@ header {
     width: 100%;
     border-bottom: 2px solid white;
 }
-
 
 .left {
     display: flex;
@@ -116,7 +124,6 @@ header {
     padding: 10px;
 }
 
-
 .search-container {
     display: flex;
     margin-bottom: 150px;
@@ -135,31 +142,32 @@ footer {
     display: none;
     margin-top: 20px;
     z-index: 2;
-  }
+}
 
-  #Pedro {
+#Pedro {
     display: none;
     margin-top: 20px;
     z-index: 2;
-  }
+}
 
 @media screen and (max-width: 600px) {
-
-    html {
+    /* 3. CONVERT BOTH TO DVH FOR MOBILE */
+    html, body {
         height: 100dvh;
     }
 
     #flex-container {
-        height: 91vh;
+        height: 100dvh; /* Swapped 91vh to 100dvh so it scales with html */
     }
 
-   .middle {
-    width: 100%;
-    position: absolute;
-   }
+    .middle {
+        width: 100%;
+        position: absolute;
+    }
 
+    /* WARNING: High margin/width scaling below may still trigger internal scrolling */
     #logo-text {
-        max-width: 300%;
+        max-width: 300%; 
         margin-top: 200px;
     }
 
@@ -176,7 +184,6 @@ footer {
         margin-top: 100%;
         height: 200px;
     }
-    
 }
 
 .dark-mode {
