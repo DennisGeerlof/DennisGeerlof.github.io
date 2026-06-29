@@ -146,8 +146,7 @@ footer {
 @media screen and (max-width: 600px) {
 
     html {
-        height: 100vh;  /* Fallback */
-        height: 100dvh; /* Modern browsers */
+        height: 100dvh;
     }
 
     #flex-container {
