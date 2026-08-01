@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-width=1.0">
+    <title>Binaire Code Oefenen - Dennis Geerlof</title>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-hover: #1d4ed8;
+            --bg: #f8fafc;
+            --card-bg: #ffffff;
+            --text: #1e293b;
+            --success: #16a34a;
+            --error: #dc2626;
+            --border: #e2e8f0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            background-color: var(--card-bg);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            width: 100%;
+            max-width: 500px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 1.5rem;
+            margin-top: 0;
+            margin-bottom: 20px;
+        }
+
+        .mode-selector {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .mode-selector label {
+            cursor: pointer;
+            background-color: var(--bg);
+            padding: 8px 16px;
+            border-radius: 6px;
+            border: 1px solid var(--border);
+            font-size: 0.9rem;
+            transition: all 0.2s;
+        }
+
+        .mode-selector input[type="radio"] {
+            display: none;
+        }
+
+        .mode-selector input[type="radio"]:checked + label {
+            background-color: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .challenge-box {
+            background-color: #f1f5f9;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-size: 2.5rem;
+            font-weight: bold;
+            font-family: monospace;
+            letter-spacing: 2px;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        input[type="text"] {
+            width: 80%;
+            padding: 12px;
+            font-size: 1.2rem;
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            text-align: center;
+            font-family: monospace;
+            transition: border-color 0.2s;
+        }
+
+        input[type="text"]:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .button-group {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 1rem;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background-color 0.2s;
+        }
+
+        .btn-check {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .btn-check:hover {
+            background-color: var(--primary-hover);
+        }
+
+        .btn-next {
+            background-color: #e2e8f0;
+            color: var(--text);
+        }
+
+        .btn-next:hover {
+            background-color: #cbd5e1;
+        }
+
+        .btn-hint {
+            background-color: transparent;
+            color: var(--primary);
+            text-decoration: underline;
+            margin-top: 15px;
+            padding: 5px;
+            font-size: 0.9rem;
+        }
+
+        #feedback {
+            margin-top: 20px;
+            font-weight: bold;
+            min-height: 24px;
+        }
+
+        .success { color: var(--success); }
+        .error { color: var(--error); }
+
+        .hint-box {
+            display: none;
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #fffbeb;
+            border: 1px solid #fde68a;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Binaire Code Oefenen</h1>
+    
+    <div class="mode-selector">
+        <input type="radio" id="mode-t2b" name="mode" value="t2b" checked onchange="setMode()">
+        <label for="mode-t2b">Tekst ➔ Binair</label>
+        
+        <input type="radio" id="mode-b2t" name="mode" value="b2t" onchange="setMode()">
+        <label for="mode-b2t">Binair ➔ Tekst</label>
+    </div>
+
+    <div id="challenge" class="challenge-box">A</div>
+    
+    <div class="input-group">
+        <input type="text" id="answer" placeholder="Typ 8 bits..." autocomplete="off">
+    </div>
+    
+    <div class="button-group">
+        <button class="btn-check" onclick="checkAnswer()">Controleer</button>
+        <button class="btn-next" onclick="generateChallenge()">Nieuwe Opgave</button>
+    </div>
+
+    <div id="feedback"></div>
+
+    <button class="btn-hint" onclick="toggleHint()">Toon/Verberg Spiekbriefje</button>
+    
+    <div id="hint" class="hint-box">
+        <strong>Handige ijkpunten (ASCII):</strong><br>
+        Spatie = 32 (00100000)<br>
+        '0' = 48 (00110000) <i>... tot '9' = 57</i><br>
+        'A' = 65 (01000001) <i>... tot 'Z' = 90</i><br>
+        'a' = 97 (01100001) <i>... tot 'z' = 122</i><br><br>
+        <i>Tip: Het verschil tussen een hoofdletter en kleine letter is precies bit 32 (de 6e van rechts).</i>
+    </div>
+</div>
+
+<script>
+    let currentMode = 't2b';
+    let currentTarget = '';
+    let currentAnswer = '';
+
+    // Genereer een willekeurig karakter (Hoofdletter, Kleine letter, of Cijfer)
+    function getRandomChar() {
+        const charRanges = [
+            [65, 90],  // A-Z
+            [97, 122], // a-z
+            [48, 57]   // 0-9
+        ];
+        // Kies een willekeurige reeks
+        const range = charRanges[Math.floor(Math.random() * charRanges.length)];
+        // Kies een willekeurig teken uit de reeks
+        const charCode = Math.floor(Math.random() * (range[1] - range[0] + 1)) + range[0];
+        return String.fromCharCode(charCode);
+    }
+
+    // Zet een karakter om naar 8-bit binair
+    function charToBinary(char) {
+        return char.charCodeAt(0).toString(2).padStart(8, '0');
+    }
+
+    function setMode() {
+        currentMode = document.querySelector('input[name="mode"]:checked').value;
+        const inputField = document.getElementById('answer');
+        
+        if (currentMode === 't2b') {
+            inputField.placeholder = "Typ 8 bits (bijv. 01000001)";
+            inputField.maxLength = 8;
+        } else {
+            inputField.placeholder = "Typ het karakter (1 teken)";
+            inputField.maxLength = 1;
+        }
+        generateChallenge();
+    }
+
+    function generateChallenge() {
+        const char = getRandomChar();
+        const binary = charToBinary(char);
+        const challengeBox = document.getElementById('challenge');
+        
+        if (currentMode === 't2b') {
+            currentTarget = binary;
+            challengeBox.innerText = char;
+        } else {
+            currentTarget = char;
+            challengeBox.innerText = binary;
+        }
+
+        // Reset velden
+        document.getElementById('answer').value = '';
+        document.getElementById('feedback').innerText = '';
+        document.getElementById('answer').focus();
+    }
+
+    function checkAnswer() {
+        const userInput = document.getElementById('answer').value.trim();
+        const feedbackBox = document.getElementById('feedback');
+
+        if (userInput === currentTarget) {
+            feedbackBox.innerHTML = `<span class="success">Goed gedaan! Dat klopt helemaal.</span>`;
+        } else {
+            if (currentMode === 't2b') {
+                feedbackBox.innerHTML = `<span class="error">Fout. Het juiste antwoord was: ${currentTarget}</span>`;
+            } else {
+                feedbackBox.innerHTML = `<span class="error">Fout. Het juiste antwoord was: '${currentTarget}'</span>`;
+            }
+        }
+    }
+
+    function toggleHint() {
+        const hintBox = document.getElementById('hint');
+        if (hintBox.style.display === "block") {
+            hintBox.style.display = "none";
+        } else {
+            hintBox.style.display = "block";
+        }
+    }
+
+    // Zorg dat de 'Enter' knop werkt voor het controleren
+    document.getElementById('answer').addEventListener("keypress", function(event) {
+        if (event.key === "Enter") {
+            event.preventDefault();
+            checkAnswer();
+        }
+    });
+
+    // Start direct met een eerste opgave
+    window.onload = generateChallenge;
+</script>
+
+</body>
+</html>
