@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alphabet Trainer - Dennis Geerlof</title>
+    <style>
+        :root {
+            --primary: #8b5cf6; /* Iets andere kleur dan de binary tool voor onderscheid */
+            --primary-hover: #7c3aed;
+            --bg: #f8fafc;
+            --card-bg: #ffffff;
+            --text: #1e293b;
+            --success: #16a34a;
+            --error: #dc2626;
+            --border: #e2e8f0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            background-color: var(--card-bg);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        h1 { font-size: 1.5rem; margin-bottom: 20px; }
+
+        .mode-selector { display: flex; gap: 10px; margin-bottom: 20px; justify-content: center; }
+        
+        .mode-selector label {
+            cursor: pointer; background: var(--bg); padding: 8px 16px; border-radius: 6px;
+            border: 1px solid var(--border); font-size: 0.9rem;
+        }
+        .mode-selector input { display: none; }
+        .mode-selector input:checked + label { background: var(--primary); color: white; border-color: var(--primary); }
+
+        .challenge-box {
+            background: #f1f5f9; padding: 30px; border-radius: 8px; margin-bottom: 20px;
+            font-size: 3rem; font-weight: bold;
+        }
+
+        input[type="text"] {
+            width: 80%; padding: 12px; font-size: 1.5rem; border: 2px solid var(--border);
+            border-radius: 8px; text-align: center; margin-bottom: 20px;
+        }
+
+        button {
+            padding: 10px 20px; border: none; border-radius: 6px; cursor: pointer;
+            font-weight: 600; background: var(--primary); color: white;
+        }
+        button:hover { background: var(--primary-hover); }
+
+        #feedback { margin-top: 15px; font-weight: bold; height: 24px; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Alphabet Trainer</h1>
+    
+    <div class="mode-selector">
+        <input type="radio" id="l2n" name="mode" value="l2n" checked onchange="generate()">
+        <label for="l2n">Letter ➔ Nummer</label>
+        <input type="radio" id="n2l" name="mode" value="n2l" onchange="generate()">
+        <label for="n2l">Nummer ➔ Letter</label>
+    </div>
+
+    <div id="challenge" class="challenge-box">A</div>
+    <input type="text" id="answer" placeholder="Typ antwoord..." autocomplete="off">
+    <br>
+    <button onclick="check()">Controleer</button>
+    <div id="feedback"></div>
+</div>
+
+<script>
+    let currentTarget = { char: '', num: 0 };
+
+    function generate() {
+        const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        const randIndex = Math.floor(Math.random() * 26);
+        currentTarget = { 
+            char: alphabet[randIndex], 
+            num: randIndex + 1 
+        };
+
+        const mode = document.querySelector('input[name="mode"]:checked').value;
+        document.getElementById('challenge').innerText = (mode === 'l2n') ? currentTarget.char : currentTarget.num;
+        document.getElementById('answer').value = '';
+        document.getElementById('feedback').innerText = '';
+        document.getElementById('answer').focus();
+    }
+
+    function check() {
+        const input = document.getElementById('answer').value.toUpperCase();
+        const mode = document.querySelector('input[name="mode"]:checked').value;
+        const correct = (mode === 'l2n') ? (input == currentTarget.num) : (input == currentTarget.char);
+        
+        if (correct) {
+            document.getElementById('feedback').innerHTML = '<span style="color:green">Goed!</span>';
+            setTimeout(generate, 800);
+        } else {
+            document.getElementById('feedback').innerHTML = '<span style="color:red">Fout, probeer opnieuw.</span>';
+        }
+    }
+
+    document.getElementById('answer').addEventListener("keypress", (e) => { if(e.key === 'Enter') check(); });
+    window.onload = generate;
+</script>
+</body>
+</html>
